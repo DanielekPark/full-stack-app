@@ -1,16 +1,23 @@
 import React from 'react';
+import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import './global.css';
 import './custom.css';
-import { Courses } from './Components/Courses';
-import {useProvideContext, ProvideContext, AppProvider} from './context'; 
+import {Courses} from './Components/Courses'; 
+import {useProvideContext} from "./context"; 
 
 function App() {
-  //const {} = useProvideContext();
+  const {coursesData, isLoading} = useProvideContext(); 
+
   return (
-    <div className="App">
-      <Courses />
-    </div>
+    <BrowserRouter>
+      {isLoading ? 
+        <h1 className="loading">LOADING...</h1> 
+          : 
+        <Route exact path='/' render={() => <Courses /> } />
+      }
+
+    </BrowserRouter>  
   );
 }
 
