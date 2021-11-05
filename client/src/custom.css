@@ -16,6 +16,19 @@ button.button {
   object-fit: scale-down;
 }
 
+.main-content {
+  padding: 1em 2em;
+}
+
+.not-found {
+  text-align: center;
+}
+
+.icn-error {
+  font-size: 3.2em;
+  margin-bottom: 0.25em;
+}
+
 #denied {
   margin-top: 20px;
 }

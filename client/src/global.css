@@ -305,6 +305,11 @@ p {
   margin: 0 auto;
 }
 
+.loading {
+  margin-top: 40vh;
+  text-align: center;
+}
+
 /* line 74, ../sass/global.sass */
 .grid,
 .grid-25,
@@ -344,7 +349,7 @@ p {
 
 /* line 102, ../sass/global.sass */
 .course--module {
-  background: #22df5e;
+  background: #5fcf80;
   border-radius: 8px;
   padding: 30px;
   margin-bottom: 30px;

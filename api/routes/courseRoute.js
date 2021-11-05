@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
   const courses = await Course
     .find()
     .sort('title')
-    .select('user title');
+    .select('user title description estimatedTime materialsNeeded');
   res.send(courses); 
 });
 
