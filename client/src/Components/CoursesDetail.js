@@ -19,7 +19,7 @@ export const CoursesDetail = () => {
     }
   }
   
-  const deleteCourse = () => fetch(`${url}/coursedetail/${id}`, {method: 'DELETE'});
+  const deleteCourse = () => fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
 
   React.useEffect(() => {
     fetchData(); 
@@ -33,7 +33,7 @@ export const CoursesDetail = () => {
               {/* UPDATE COURSE LINK */}<span>
                 <Link className="button" to={`/updatecourse/${id}`}>Update Course</Link>
                 {/* <Link onClick={this.deleteCourse} className="button" href="/">Delete Course</Link> */}
-                <Link className="button" to="/">Delete Course</Link>                
+                <Link onClick={deleteCourse} className="button" to="/">Delete Course</Link>                
               </span>  
               <Link className="button button-secondary" to="/courses">Return to List</Link>
             </div>
@@ -70,7 +70,4 @@ export const CoursesDetail = () => {
         </div>
       </div>        
   )  
-  
-  // use fetch to get info from Rest APi
-  //look at pdf
 }
