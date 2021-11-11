@@ -4,56 +4,69 @@ import {ProvideContext, useProvideContext} from '../context';
 
 const UserSignIn = () => {
 //SIGN IN
-  const [users, setUsers] = React.useState([]); //use to check for list of users
+  const [user, setUser] = React.useState([]); //use to check for list of users
   const [emailAddress, setEmailAddress] = React.useState(''); 
   const [password, setPassword] = React.useState(''); 
   const [isSignedIn, setIsSignedIn] = React.useState(false); 
   
   const {fetchData} = useProvideContext(ProvideContext); 
 
+  // use a get request to retrieve the user's email and password when the sign in button is clicked 
   const handleSubmit = (event) => {
     event.preventDefault(); 
+    fetchData('users')
+      .then((users) => checkUser(users)); 
   }
 
-  // use a get request to retrieve the user's email and password when the sign in button is clicked
-  //check to see if the information submitted matches any of the registered users
-  //look at users hook
-  // Get the value from text inputs
-  //https://medium.com/geekculture/using-react-hooks-to-get-input-value-9e0aa19b6b37
-  //cancel put redirects the user to the list of courses. 
-  /* When signed in the form is not displayed
-  and redirects to the href /
-  */
+  //when clicked redirects the user to the list of courses. 
+  const cancelBtn = () => window.location.href = '/courses'; 
+
+  const checkUser = async (users) => {
+    //checks to see if the information submitted matches any of the registered users    
+    if(!emailAddress && !password) return;
+    const checkEmail = await users.find((item) => item.emailAddress === emailAddress); 
+    const checkPassword = await users.find((item) => item.password === password);
+
+    //When signed in, the form is not displayed
+    if(!checkEmail || !checkPassword) {
+      alert('Please check your email and password');
+    } else {
+      setUser(`${checkEmail.firstName} ${checkEmail.lastName}`)
+      setIsSignedIn(true);
+    } 
+    
+    setEmailAddress(''); 
+    setPassword('');    
+  }
 
   // const errorId = 'error';
-  // const formId = 'signInForm';
-  // const buttonsId = 'buttons';  
+  // const formId = '';
+  // const buttonsId = '';  
 
-return (
-    <div className="bounds">
-      <div className="grid-33 centered signin">
-        <h1>Sign In</h1>
-        {/* {needs an id 
-        form
-        div      } */}
-        <div>
-        {/* <form id={formId}> */}
-        <form onSubmit={handleSubmit}>
-            <div><input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" autoComplete="username" value={emailAddress} onChange={(e) => setEmailAddress(e.target.value)}/></div>
-            <div><input id="password" name="password" type="password" placeholder="Password" autoComplete="password" value={password} onChange={(e) => setPassword(e.target.value)}/></div>
-            {/* <div id={buttonsId} className="grid-100 pad-bottom"> */}
-            <div id="#" className="grid-100 pad-bottom">            
-              {/* <button className="button" type="submit" onClick={this.signIn}>Sign In</button> */}
-              <button className="button" type="submit">Sign In</button>         
-              {/* <button className="button button-secondary" onClick={this.props.cancel}>Cancel</button> */}
-              <button className="button button-secondary">Cancel</button>            
-            </div>
-          </form>
+  return (
+      <div className="bounds">
+        <div className="grid-33 centered signin">
+          <h1>{isSignedIn ? `Hello ${user}!` : 'Sign In'}</h1>
+          {isSignedIn ? 
+            null 
+            : 
+            <>
+              <div>
+                <form id='signInForm' onSubmit={handleSubmit}>
+                  <div><input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" autoComplete="username" value={emailAddress} onChange={(event) => setEmailAddress(event.target.value)}/></div>
+                  <div><input id="password" name="password" type="password" placeholder="Password" autoComplete="password" value={password} onChange={(event) => setPassword(event.target.value)}/></div>
+                  <div id="buttons" className="grid-100 pad-bottom">            
+                    <button className="button" type="submit">Sign In</button>         
+                    <button className="button button-secondary" onClick={cancelBtn}>Cancel</button>            
+                  </div>
+                </form>     
+              </div>
+              <p>Don't have a user account? <a href="/sign-up">Click here</a> to sign up!</p>
+            </>
+          }
         </div>
-        <p>Don't have a user account? <a href="/sign-up">Click here</a> to sign up!</p>
-      </div>
-    </div>  
-  )  
+      </div>  
+    )  
 }
 
 export default UserSignIn; 
