@@ -5,24 +5,15 @@ import {ProvideContext, useProvideContext} from '../context';
 
 export const CoursesDetail = () => {
   const [courseDetail, setCourseDetail] = React.useState([]); 
-  const {url} = useProvideContext(ProvideContext); 
+  const {fetchData} = useProvideContext(ProvideContext); 
   const {id} = useParams(); 
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(url); 
-      const data = await response.json(); 
-      const courseInfo = await data.find((course) => course._id === id);
-      setCourseDetail(courseInfo); 
-    }catch (err) {
-      console.log(`There was a problem ${err}`); 
-    }
-  }
   
   const deleteCourse = () => fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
 
   React.useEffect(() => {
-    fetchData(); 
+    fetchData('courses')
+      .then((data) => data.find((course) => course._id === id))
+      .then((data) => setCourseDetail(data))
   }, []);
 
   return (
@@ -30,12 +21,11 @@ export const CoursesDetail = () => {
         <div className="actions--bar">
           <div className="bounds">
             <div className="grid-100">
-              {/* UPDATE COURSE LINK */}<span>
-                <Link className="button" to={`/updatecourse/${id}`}>Update Course</Link>
-                {/* <Link onClick={this.deleteCourse} className="button" href="/">Delete Course</Link> */}
-                <Link onClick={deleteCourse} className="button" to="/">Delete Course</Link>                
+              <span>
+                <a className="button" href={`/updatecourse/${id}`}>Update Course</a>
+                <a onClick={deleteCourse} className="button" href="/">Delete Course</a>                
               </span>  
-              <Link className="button button-secondary" to="/courses">Return to List</Link>
+              <a className="button button-secondary" to="/courses">Return to List</a>
             </div>
           </div>
         </div>

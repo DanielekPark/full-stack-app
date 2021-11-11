@@ -207,7 +207,7 @@ body {
 
 /* line 13, ../sass/global.sass */
 .header {
-  background: #57496e;
+  background: #662f90;
   padding: 20px 0;
   margin-bottom: 30px;
 }
@@ -690,7 +690,7 @@ input:focus {
 
 /* line 507, ../sass/global.sass */
 .button {
-  background: #7c689b;
+  background: #995ac9;
   color: #fff;
   font-family: 'Work Sans', sans-serif;
   font-size: 18px;
@@ -719,7 +719,7 @@ input:focus {
 /* line 525, ../sass/global.sass */
 .button-secondary {
   color: #7c689b;
-  background: none;
+  background: #fff;
   box-shadow: 0 0 0 2px #7c689b inset;
   -webkit-transition: box-shadow 0.2s, color 0.2s;
   -moz-transition: box-shadow 0.2s, color 0.2s;

@@ -5,13 +5,13 @@ const ProvideContext = React.createContext();
 
 const AppProvider = ({children}) => {
   const [coursesData, setCoursesData] = React.useState([]); 
-  const url = 'http://localhost:5001/api/courses'; 
-
-  const fetchData = async () => {
+  
+  //FETCHES DATA FOR USERS OR COURSES 
+  const fetchData = async (resource) => {
+    const url = `http://localhost:5001/api/${resource}`; 
     try {
       const response = await fetch(url); 
-      const data = await response.json();
-      setCoursesData(data); 
+      return await response.json();
     }catch (err) {
       console.log(`There was a problem ${err}`); 
     }
@@ -23,7 +23,7 @@ const AppProvider = ({children}) => {
   // }, [coursesData])
 
   return (
-    <ProvideContext.Provider value={{fetchData, coursesData, url}}>
+    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData}}>
       {children}
     </ProvideContext.Provider>
   );
