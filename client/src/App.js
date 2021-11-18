@@ -10,9 +10,9 @@ import  {UpdateCourse}  from './Components/UpdateCourse';
 import {NewCourse} from './Components/NewCourse';
 import Header from './Components/Header'; 
 import UserSignIn from './Components/UserSignIn';
+import UserSignUp from './Components/UserSignUp';
 
 function App() {
-  const [coursesData, setCoursesData] = React.useState([]);   
 
   return (
     <BrowserRouter>
@@ -20,7 +20,8 @@ function App() {
       <Route exact path='/courses'><Courses /></Route>
       <Route path="/coursedetail/:id"><CoursesDetail /></Route>
       <Route path='/updatecourse/:id'><UpdateCourse /></Route>  
-      <Route path='/sign-in'><UserSignIn /></Route>                
+      <Route path='/sign-in'><UserSignIn /></Route> 
+      <Route path='/sign-up'><UserSignUp /></Route>                
     </BrowserRouter>  
   );
 }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'); 
-//const Joi = require('Joi'); 
+const { User } = require("./userModel");
 
 const courseSchema = new mongoose.Schema({
   user: {

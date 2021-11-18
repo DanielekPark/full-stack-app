@@ -3,26 +3,17 @@ import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
 
 const UserSignIn = () => {
-//SIGN IN
-  const [user, setUser] = React.useState([]); //use to check for list of users
-  const [emailAddress, setEmailAddress] = React.useState(''); 
-  const [password, setPassword] = React.useState(''); 
-  const [isSignedIn, setIsSignedIn] = React.useState(false); 
-  
-  const {fetchData} = useProvideContext(ProvideContext); 
+  const {fetchData, firstName, setFirstName, lastName, setLastName, emailAddress, setEmailAddress, password, setPassword, isSignedIn, setIsSignedIn, cancelBtn} = useProvideContext(ProvideContext);
 
-  // use a get request to retrieve the user's email and password when the sign in button is clicked 
+  // used a get request to retrieve the user's email and password when the sign in button is clicked 
   const handleSubmit = (event) => {
     event.preventDefault(); 
     fetchData('users')
       .then((users) => checkUser(users)); 
   }
 
-  //when clicked redirects the user to the list of courses. 
-  const cancelBtn = () => window.location.href = '/courses'; 
-
   const checkUser = async (users) => {
-    //checks to see if the information submitted matches any of the registered users    
+    //check to see if the information submitted matches any of the registered users    
     if(!emailAddress && !password) return;
     const checkEmail = await users.find((item) => item.emailAddress === emailAddress); 
     const checkPassword = await users.find((item) => item.password === password);
@@ -31,14 +22,15 @@ const UserSignIn = () => {
     if(!checkEmail || !checkPassword) {
       alert('Please check your email and password');
     } else {
-      setUser(`${checkEmail.firstName} ${checkEmail.lastName}`)
+      setFirstName(`${checkEmail.firstName}`); 
+      setLastName(`${checkEmail.lastName}`); 
       setIsSignedIn(true);
     } 
     
     setEmailAddress(''); 
     setPassword('');    
   }
-
+  
   // const errorId = 'error';
   // const formId = '';
   // const buttonsId = '';  
@@ -46,7 +38,7 @@ const UserSignIn = () => {
   return (
       <div className="bounds">
         <div className="grid-33 centered signin">
-          <h1>{isSignedIn ? `Hello ${user}!` : 'Sign In'}</h1>
+          <h1>{isSignedIn ? `Hello ${firstName} ${lastName}!` : 'Sign In'}</h1>
           {isSignedIn ? 
             null 
             : 
