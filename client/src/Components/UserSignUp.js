@@ -20,9 +20,8 @@ const UserSignUp = () => {
         headers: {
           'Content-Type': 'application/json'},
         body: JSON.stringify(user) 
-      })
+      }); 
     const data = await response.json(); 
-    if(!data) console.log(data); 
     
   }
 

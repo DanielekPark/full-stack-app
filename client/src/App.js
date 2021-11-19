@@ -11,6 +11,7 @@ import {NewCourse} from './Components/NewCourse';
 import Header from './Components/Header'; 
 import UserSignIn from './Components/UserSignIn';
 import UserSignUp from './Components/UserSignUp';
+import CreateCourse from './Components/CreateCourse';
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
       <Route path="/coursedetail/:id"><CoursesDetail /></Route>
       <Route path='/updatecourse/:id'><UpdateCourse /></Route>  
       <Route path='/sign-in'><UserSignIn /></Route> 
-      <Route path='/sign-up'><UserSignUp /></Route>                
+      <Route path='/sign-up'><UserSignUp /></Route>
+      <Route path='/createcourse'><CreateCourse /></Route>                
     </BrowserRouter>  
   );
 }

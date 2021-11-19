@@ -5,12 +5,12 @@ const courseSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   },
   title: {
     type: String, 
     required: true, 
-    minLength: 3, 
+    minLength: 5,
     maxLength: 75
     }, 
   description: {
@@ -19,10 +19,13 @@ const courseSchema = new mongoose.Schema({
     minLength: 5,
     },
   estimatedTime: {
-    type: String, 
+    type: String,
+    minLength: 5,
+    required: true, 
     },
   materialsNeeded: {
-    type: String
+    type: String,
+    required: true,
     }
 }); 
 
