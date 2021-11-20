@@ -12,7 +12,7 @@ const AppProvider = ({children}) => {
   const [user, setUser] = React.useState({firstName:'', lastName: '', emailAddress: '', password: ''})
   const [confirmPassword, setConfirmPassword] = React.useState(''); 
   const [isSignedIn, setIsSignedIn] = React.useState(false);
-  const [newCourse, setNewCourse] = React.useState({title: '', description: '', estimatedTime: '', materialsNeeded: '' });   
+  const [course, setCourse] = React.useState({title: '', description: '', estimatedTime: '', materialsNeeded: ''});   
 
 
   //FETCHES DATA FOR USERS OR COURSES 
@@ -32,10 +32,23 @@ const AppProvider = ({children}) => {
   }
 
   //when clicked redirects the user to the list of courses. 
-  const cancelBtn = () => window.location.href = '/courses';   
+  const cancelBtn = () => window.location.href = '/courses'; 
+  
+  const handleSubmit = async (event, obj, method) => {    
+    event.preventDefault(); 
+    const url = "http://localhost:5001/api/courses"; 
+
+    const response = await fetch(url, 
+      {
+        method: method,
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(obj) 
+      }); 
+    const data = await response.json(response);
+  }  
 
   return (
-    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, firstName, lastName, setLastName, setFirstName, emailAddress, setEmailAddress, password, setPassword, isSignedIn, setIsSignedIn, user, setUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, newCourse, setNewCourse}}>
+    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, firstName, lastName, setLastName, setFirstName, emailAddress, setEmailAddress, password, setPassword, isSignedIn, setIsSignedIn, user, setUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit}}>
       {children}
     </ProvideContext.Provider>
   );

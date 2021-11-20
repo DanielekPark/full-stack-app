@@ -46,14 +46,14 @@ router.put('/:id', async (req, res, next) => {
   //VALIDATION
   
   try {
-     let course = await Course.findByIdAndUpdate(req.params.id, {
-      user: req.body.user,
+    let course = await Course.findByIdAndUpdate(req.params.id, {
+      //user: req.params.id,
       title: req.body.title,
       description: req.body.description,
       estimatedTime: req.body.estimatedTime,
       materialsNeeded: req.body.materialsNeeded    
     }, {new: true, runValidators: true}); 
-   
+
   }catch (err) {
     return next(createError(400, `PLEASE FILL OUT REQUIRED INFORMATION ${err} OR CHECK THE ID`));
   }
