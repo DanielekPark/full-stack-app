@@ -53,7 +53,7 @@ const UserSignIn = () => {
                   </div>
                 </form>     
               </div>
-              <p>Don't have a user account? <a href="/sign-up">Click here</a> to sign up!</p>
+              <p>Don't have a user account? <a href="/signup">Click here</a> to sign up!</p>
             </>
           }
         </div>

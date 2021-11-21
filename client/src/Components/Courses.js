@@ -2,7 +2,6 @@ import React from "react";
 import {Link, Redirect, Route} from "react-router-dom";
 import {ProvideContext, useProvideContext} from '../context';
 import {CoursesDetail} from './CoursesDetail'; 
-import { NewCourse } from "./NewCourse";
 
 export const Courses = () => {
   const {fetchData, coursesData, setCoursesData} = useProvideContext(ProvideContext);
@@ -26,7 +25,7 @@ export const Courses = () => {
           </div>)
       })}
       <div className="grid-33">
-        <a href="/createcourse" className="course--module course--add--module">
+        <a href={`/courses/create`} className="course--module course--add--module">
           <h3 className="course--add--title">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
               viewBox="0 0 13 13" className="add">

@@ -21,10 +21,10 @@ export const CoursesDetail = () => {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <a className="button" href={`/updatecourse/${id}`}>Update Course</a>
+                <a className="button" href={`/courses/${id}/update`}>Update Course</a>
                 <a onClick={deleteCourse} className="button" href="/">Delete Course</a>                
               </span>  
-              <a className="button button-secondary" to="/courses">Return to List</a>
+              <a className="button button-secondary" href="/courses">Return to List</a>
             </div>
           </div>
         </div>

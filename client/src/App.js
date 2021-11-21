@@ -19,10 +19,10 @@ function App() {
       <Header />
       <Route exact path='/courses'><Courses /></Route>
       <Route path="/coursedetail/:id"><CoursesDetail /></Route>
-      <Route path='/sign-in'><UserSignIn /></Route> 
-      <Route path='/sign-up'><UserSignUp /></Route>
-      <Route path='/createcourse'><CreateCourse /></Route>
-      <Route path='/updatecourse/:id'><UpdateCourse /></Route>                
+      <Route path='/signin'><UserSignIn /></Route> 
+      <Route path='/signup'><UserSignUp /></Route>
+      <Route path='/courses/create'><CreateCourse /></Route>
+      <Route path='/courses/:id/update'><UpdateCourse /></Route>                
     </BrowserRouter>  
   );
 }
