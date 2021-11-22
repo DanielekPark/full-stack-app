@@ -30,4 +30,5 @@ function App() {
 }
 
 export default App;
+//USE CUSTOM HOOKS INSTEAD OF HIGHER ORDER COMPONENTS
 //https://dev.to/gethackteam/from-higher-order-components-hoc-to-react-hooks-2bm9

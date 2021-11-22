@@ -4,13 +4,13 @@ import {ProvideContext, useProvideContext} from '../context';
 const CreateCourse = () => {
   const {cancelBtn, handleChange, handleSubmit, course, setCourse} = useProvideContext(ProvideContext);
 
-  React.useEffect(() => {
-    console.log(course);
-  }, []);
+  // React.useEffect(() => {
+  //   console.log(course);
+  // }, []);
 
-  React.useEffect(() => {
-    console.log(course);
-  }, [course]);
+  // React.useEffect(() => {
+  //   console.log(course);
+  // }, [course]);
 
   return (
     <div className="bounds course--detail">

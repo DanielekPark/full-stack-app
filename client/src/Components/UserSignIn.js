@@ -5,7 +5,7 @@ import {ProvideContext, useProvideContext} from '../context';
 const UserSignIn = () => {
   const {fetchData, isSignedIn, setIsSignedIn, cancelBtn, handleChange, signInUser, setSignInUser} = useProvideContext(ProvideContext);
 
-  //GET REQUEST user email & password, WHEN SIGN-IN BUTTON IS CLICKED
+  //GET REQUEST user email & password, FOR SIGNING-IN
   const handleSubmit = (event) => {
     event.preventDefault(); 
     fetchData('users')
