@@ -3,12 +3,7 @@ import {ProvideContext, useProvideContext} from '../context';
 
 const UserSignUp = () => {
   
-  const {fetchData, firstName, setFirstName, lastName, setLastName, emailAddress, setEmailAddress, password, setPassword, isSignedIn, setIsSignedIn, user, setUser, cancelBtn, confirmPassword, setConfirmPassword} = useProvideContext(ProvideContext);
-
-  const handleChange = (event) => {
-    const name = event.target.name; 
-    setUser({...user, [name]: event.target.value}); 
-  }
+  const {newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange} = useProvideContext(ProvideContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
@@ -19,7 +14,7 @@ const UserSignUp = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'},
-        body: JSON.stringify(user) 
+        body: JSON.stringify(newUser) 
       }); 
     const data = await response.json(); 
     
@@ -31,10 +26,10 @@ const UserSignUp = () => {
         <h1>Sign Up</h1>
         <div>
           <form id="formId" onSubmit={handleSubmit}>            
-            <div><input id="firstName" name="firstName" type="text" placeholder="First Name" value={user.firstName} onChange={handleChange}/></div>
-            <div><input id="lastName" name="lastName" type="text" placeholder="Last Name" value={user.lastName} onChange={handleChange}/></div>
-            <div><input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" value={user.emailAddress} onChange={handleChange}/></div>
-            <div><input id="password" name="password" type="password" autoComplete="newpassword" placeholder="Password" value={user.password} onChange={handleChange}/></div>
+            <div><input id="firstName" name="firstName" type="text" placeholder="First Name" value={newUser.firstName} onChange={(event) => handleChange(event, setNewUser, newUser)}/></div>
+            <div><input id="lastName" name="lastName" type="text" placeholder="Last Name" value={newUser.lastName} onChange={(event) => handleChange(event, setNewUser, newUser)}/></div>
+            <div><input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" value={newUser.emailAddress} onChange={(event) => handleChange(event, setNewUser, newUser)}/></div>
+            <div><input id="password" name="password" type="password" autoComplete="newpassword" placeholder="Password" value={newUser.password} onChange={(event) => handleChange(event, setNewUser, newUser)}/></div>
             <div><input id="confirmPassword" name="confirmPassword" type="password" autoComplete="newpassword" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}/></div>
             <div id="buttonId" className="grid-100 pad-bottom">
               <button className="button" type="submit">Sign Up</button>

@@ -1,21 +1,17 @@
 import React from "react";
-//import { data } from './Data/data'; 
 
 const ProvideContext = React.createContext();
 
 const AppProvider = ({children}) => {
   const [coursesData, setCoursesData] = React.useState([]); 
-  const [firstName, setFirstName] = React.useState([]); 
-  const [lastName, setLastName] = React.useState([]); 
-  const [emailAddress, setEmailAddress] = React.useState(''); 
-  const [password, setPassword] = React.useState(''); 
-  const [user, setUser] = React.useState({firstName:'', lastName: '', emailAddress: '', password: ''})
+  const [newUser, setNewUser] = React.useState({firstName:'', lastName: '', emailAddress: '', password: ''}); 
+  const [course, setCourse] = React.useState({title: '', description: '', estimatedTime: '', materialsNeeded: ''});   
+  const [signInUser, setSignInUser] = React.useState({emailAddress: '', password: ''}); 
   const [confirmPassword, setConfirmPassword] = React.useState(''); 
   const [isSignedIn, setIsSignedIn] = React.useState(false);
-  const [course, setCourse] = React.useState({title: '', description: '', estimatedTime: '', materialsNeeded: ''});   
+  
 
-
-  //FETCHES DATA FOR USERS OR COURSES 
+  //GET REQUEST FOR USERS OR COURSES 
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`; 
     try {
@@ -26,6 +22,7 @@ const AppProvider = ({children}) => {
     }
   }   
 
+  //FOR CONTROLLED INPUTS, callback IS A REACT HOOK; obj IS THE VALUE OF THE HOOK
   const handleChange = (event, callback, obj) => {
     const name = event.target.name; 
     callback({...obj, [name]: event.target.value}); 
@@ -34,6 +31,7 @@ const AppProvider = ({children}) => {
   //when clicked redirects the user to the list of courses. 
   const cancelBtn = () => window.location.href = '/courses'; 
   
+  //CREATING COURSES; obj IS THE VALUE OF A REACT HOOK; method IS THE TYPE OF THE HTTP REQUEST
   const handleSubmit = async (event, obj, method) => {    
     event.preventDefault(); 
     const url = "http://localhost:5001/api/courses"; 
@@ -48,7 +46,7 @@ const AppProvider = ({children}) => {
   }  
 
   return (
-    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, firstName, lastName, setLastName, setFirstName, emailAddress, setEmailAddress, password, setPassword, isSignedIn, setIsSignedIn, user, setUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit}}>
+    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, isSignedIn, setIsSignedIn, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, signInUser, setSignInUser}}>
       {children}
     </ProvideContext.Provider>
   );

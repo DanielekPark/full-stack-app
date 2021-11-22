@@ -4,13 +4,11 @@ import {ProvideContext, useProvideContext} from '../context';
 import {CoursesDetail} from './CoursesDetail'; 
 
 export const Courses = () => {
-  const {fetchData, coursesData, setCoursesData} = useProvideContext(ProvideContext);
-
-  //<Route /> RENDERS UI when the path matches the url 
-  //<Link /> USE FOR LINKING ROUTES TO YOUR APP
+  const {fetchData, coursesData, setCoursesData, isSignedIn} = useProvideContext(ProvideContext);
   React.useEffect(() => {
     fetchData('courses')
       .then((data) => setCoursesData(data))
+    console.log(isSignedIn)  
   }, []);
 
   return (

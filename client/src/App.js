@@ -9,6 +9,7 @@ import  {CoursesDetail}  from './Components/CoursesDetail';
 import Header from './Components/Header'; 
 import UserSignIn from './Components/UserSignIn';
 import UserSignUp from './Components/UserSignUp';
+import UserSignOut from './Components/UserSignOut';
 import CreateCourse from './Components/CreateCourse';
 import {UpdateCourse} from './Components/UpdateCourse';
 
@@ -21,6 +22,7 @@ function App() {
       <Route path="/coursedetail/:id"><CoursesDetail /></Route>
       <Route path='/signin'><UserSignIn /></Route> 
       <Route path='/signup'><UserSignUp /></Route>
+      <Route path='/signout'><UserSignOut /></Route>
       <Route path='/courses/create'><CreateCourse /></Route>
       <Route path='/courses/:id/update'><UpdateCourse /></Route>                
     </BrowserRouter>  
@@ -28,3 +30,4 @@ function App() {
 }
 
 export default App;
+//https://dev.to/gethackteam/from-higher-order-components-hoc-to-react-hooks-2bm9

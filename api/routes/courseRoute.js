@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res, next) => {
   try {
     let course = new Course({
-      user: req.body.user,
+      user: req.body.user, //user: req.body._id
       title: req.body.title,
       description: req.body.description,
       estimatedTime: req.body.estimatedTime,
