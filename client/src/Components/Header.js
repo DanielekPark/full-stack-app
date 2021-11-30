@@ -4,7 +4,13 @@ import UserSignIn from "./UserSignIn";
 import {ProvideContext, useProvideContext} from '../context';
 
 const Header = () => {
-  const {isSignedIn, setIsSignedIn} = useProvideContext(ProvideContext);
+  const {isSignedIn, setIsSignedIn, isUserSignedIn, signOut} = useProvideContext(ProvideContext);
+
+  //useeffect to check if user signedin
+
+  React.useEffect(() => {
+    isUserSignedIn()
+  }, [])
 
   return (
     <div className="header">
@@ -14,7 +20,7 @@ const Header = () => {
           {isSignedIn ? 
             <>
               <span>Welcome firstName lastName</span>
-              <a className="signout" href="/signout">Sign Out</a>
+              <a className="signout" href="/signout" onClick={signOut}>Sign Out</a>
             </>
               : 
             <>

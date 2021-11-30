@@ -59,6 +59,8 @@ router.post("/", async (req, res, next) => {
     console.log('There is a problem with the route'); 
     next(createError(400, `there was a problem with ${err}`));
   }
+
+  //NEED bcrypt.compare()
 });
 
 module.exports = router;

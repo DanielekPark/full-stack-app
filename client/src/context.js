@@ -8,10 +8,10 @@ const AppProvider = ({children}) => {
   const [course, setCourse] = React.useState({title: '', description: '', estimatedTime: '', materialsNeeded: ''});   
   const [signInUser, setSignInUser] = React.useState({emailAddress: '', password: ''}); 
   const [confirmPassword, setConfirmPassword] = React.useState(''); 
-  const [isSignedIn, setIsSignedIn] = React.useState(false);
+  const [isSignedIn, setIsSignedIn] = React.useState(false); 
   
 
-  //GET REQUEST FOR USERS OR COURSES 
+  //GET REQUEST FOR USERS
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`; 
     try {
@@ -19,6 +19,7 @@ const AppProvider = ({children}) => {
       return await response.json();
     }catch (err) {
       console.log(`There was a problem ${err}`); 
+      throw Error(err); 
     }
   }   
 
@@ -45,8 +46,26 @@ const AppProvider = ({children}) => {
     const data = await response.json(response);
   }  
 
+
+  //check local storage; make sure the values are valid  
+  const isUserSignedIn = () => {
+    //pull from local storage and check user; call isSignedIn in react.useEffect, if it exists dont display the form
+    const user = JSON.parse(localStorage.getItem('user'));
+    //if there's a user stored in storage don't display the form; 
+    if(!user) {
+      setIsSignedIn(false);
+    } else {
+      setIsSignedIn(true); 
+    }
+  }
+  
+  const signOut = () => {
+    const user = localStorage.removeItem('user');  
+    setIsSignedIn(false); 
+  }
+
   return (
-    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, isSignedIn, setIsSignedIn, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, signInUser, setSignInUser}}>
+    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, signInUser, setSignInUser, isSignedIn, setIsSignedIn, isUserSignedIn, signOut}}>
       {children}
     </ProvideContext.Provider>
   );
