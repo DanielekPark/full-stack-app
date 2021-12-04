@@ -5,11 +5,17 @@ const UserSignUp = () => {
   
   const {newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange} = useProvideContext(ProvideContext);
 
+  const catchErr = (err) => {
+    console.log(err); 
+    //alert(`please check your email and password`)
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     //return if length or passwords don't match:
 
     const url = "http://localhost:5001/api/users"; 
+    //try{}catch(err)
 
     const response = await fetch(url, 
       {
@@ -19,7 +25,8 @@ const UserSignUp = () => {
         body: JSON.stringify(newUser) 
       }); 
     const data = await response.json(); 
-    
+    localStorage.setItem('user', JSON.stringify(data)); 
+    window.location.href = '/courses'; 
   }
 
   return (

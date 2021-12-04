@@ -16,16 +16,19 @@ router.get('/', async (req, res) => {
   res.send(courses); 
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
   //returns a course; including the user that owns the course for the provided course id
-  const course = await Course.findById(req.params.id);
-  
-  res.send(course); 
+  try {
+    const course = await Course.findById(req.params.id);
+    res.send(course); 
+  }catch (err){
+    console.log(err);
+    next(); 
+  }
 });
 
 //POST
 router.post('/', async (req, res, next) => {
-  //None of the current users will have a match ID?
   try {
     let course = new Course({
       user: req.body._id,
@@ -38,8 +41,7 @@ router.post('/', async (req, res, next) => {
   }catch (err) {
     next(createError(400, `there was a problem with ${err}`));
   }
-  //set location header "/"
-  res.location(`/`);
+  res.location("/");
   return res.send({}); 
 });
 

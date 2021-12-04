@@ -7,9 +7,7 @@ const UserSignOut = () => {
   
   React.useEffect(() => setIsSignedIn(false), []); 
 
-  return(
-    <Redirect to='/courses'></Redirect>
-  )
+  return <Redirect to='/courses' />
 }
 
 export default UserSignOut; 

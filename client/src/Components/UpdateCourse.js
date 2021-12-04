@@ -7,12 +7,14 @@ export const UpdateCourse = () => {
   const {cancelBtn, handleChange, course, setCourse} = useProvideContext(ProvideContext);
   const {id} = useParams();
 
-  //prepopulate the inputs, client won't have to re-type
+  //const {isSignedIn} = usePrivateRoute(); 
+  //if true return below; false redirect to signin 
+  //prepopulate the inputs, client won't have to re-type?
   //useState to prepopulate 
-
+  const url = `http://localhost:5001/api/courses/${id}`; 
   const handleSubmit = async (event, obj, method) => {    
     event.preventDefault(); 
-    const url = `http://localhost:5001/api/courses/${id}`; 
+    // const url = `http://localhost:5001/api/courses/${id}`; 
 
     const response = await fetch(url, 
       {
@@ -29,7 +31,8 @@ export const UpdateCourse = () => {
   React.useEffect(() => {
     console.log(course);
   }, [course]); 
-
+  
+  //const if(!isSignedIn) return <Redirect to="/signin" />
   return (
     <div className="bounds course--detail">
       <h1>Update A Course</h1>

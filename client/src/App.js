@@ -30,5 +30,11 @@ function App() {
 }
 
 export default App;
-//USE CUSTOM HOOKS INSTEAD OF HIGHER ORDER COMPONENTS
-//https://dev.to/gethackteam/from-higher-order-components-hoc-to-react-hooks-2bm9
+/*
+CHECK FOR CREATECOURSE LINES 7-9
+userRoute /:id NOT NEEDED?
+src/Components/UserSignOut.js
+src/usePrivateRoute.js
+  Line 8:47:  React Hook React.useEffect has a missing dependency: 'setIsSignedIn'. Either include it or remove the dependency array
+ask about consulting position
+*/ 

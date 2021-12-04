@@ -6,6 +6,18 @@ export const CoursesDetail = () => {
   const [courseDetail, setCourseDetail] = React.useState([]); 
   const {fetchData} = useProvideContext(ProvideContext); 
   const {id} = useParams(); 
+  //const {isSignedIn} = usePrivateRoute(); 
+
+  //User Authorization
+  /*
+  {isSignedIn && id === courseDetail.user ? 
+    <span>
+      <a className="button" href={`/courses/${id}/update`}>Update Course</a>
+      <a onClick={deleteCourse} className="button" href="/">Delete Course</a>                
+    </span> 
+    :
+    null} 
+  */ 
   
   const deleteCourse = () => fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
 
@@ -14,6 +26,10 @@ export const CoursesDetail = () => {
       .then((data) => data.find((course) => course._id === id))
       .then((data) => setCourseDetail(data))
   }, []);
+
+  React.useEffect(() => {
+    console.log(courseDetail);
+  }, [courseDetail]); 
 
   return (
       <div>

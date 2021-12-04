@@ -6,7 +6,7 @@ const AppProvider = ({children}) => {
   const [coursesData, setCoursesData] = React.useState([]); 
   const [newUser, setNewUser] = React.useState({firstName:'', lastName: '', emailAddress: '', password: ''}); 
   const [course, setCourse] = React.useState({title: '', description: '', estimatedTime: '', materialsNeeded: ''});   
-  const [signInUser, setSignInUser] = React.useState({emailAddress: '', password: ''}); 
+  const [userAccount, setUserAccount] = React.useState({emailAddress: '', password: ''}); 
   const [confirmPassword, setConfirmPassword] = React.useState(''); 
   const [isSignedIn, setIsSignedIn] = React.useState(false); 
   
@@ -46,12 +46,30 @@ const AppProvider = ({children}) => {
     const data = await response.json(response);
   }  
 
+  //CHECK USER'S EMAIL & PASSWORD
+  const signIn = async (users) => {
+    if(!userAccount.emailAddress && !userAccount.password) return;
+    const checkEmail = await users.find((item) => item.emailAddress === userAccount.emailAddress); 
+    const checkPassword = await users.find((item) => item.password === userAccount.password);
+
+    //When signed in, the form is not displayed
+    if(!checkEmail || !checkPassword) {
+      alert('Please check your email and password');
+      return;
+    }else {
+      console.log(checkEmail)
+      localStorage.setItem('user', JSON.stringify(userAccount));
+      setIsSignedIn(true);  
+    }
+  }
+
+
 
   //check local storage; make sure the values are valid  
   const isUserSignedIn = () => {
-    //pull from local storage and check user; call isSignedIn in react.useEffect, if it exists dont display the form
+    //if there's a user stored in storage don't display the form;
     const user = JSON.parse(localStorage.getItem('user'));
-    //if there's a user stored in storage don't display the form; 
+
     if(!user) {
       setIsSignedIn(false);
     } else {
@@ -60,12 +78,12 @@ const AppProvider = ({children}) => {
   }
   
   const signOut = () => {
-    const user = localStorage.removeItem('user');  
+    localStorage.removeItem('user');  
     setIsSignedIn(false); 
   }
 
   return (
-    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, signInUser, setSignInUser, isSignedIn, setIsSignedIn, isUserSignedIn, signOut}}>
+    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, userAccount, setUserAccount, isSignedIn, setIsSignedIn, isUserSignedIn, signIn, signOut}}>
       {children}
     </ProvideContext.Provider>
   );

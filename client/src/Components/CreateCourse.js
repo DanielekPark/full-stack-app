@@ -1,17 +1,12 @@
 import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
-
+//import { Redirect } from "react-router-dom";
 const CreateCourse = () => {
   const {cancelBtn, handleChange, handleSubmit, course, setCourse} = useProvideContext(ProvideContext);
 
-  // React.useEffect(() => {
-  //   console.log(course);
-  // }, []);
-
-  // React.useEffect(() => {
-  //   console.log(course);
-  // }, [course]);
-
+  //const {isSignedIn} = usePrivateRoute(); 
+  //if true return below; false redirect to signin 
+  //const if(!isSignedIn) return <Redirect to="/signin" />
   return (
     <div className="bounds course--detail">
       <h1>Create A Course</h1>
