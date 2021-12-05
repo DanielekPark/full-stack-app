@@ -63,8 +63,6 @@ const AppProvider = ({children}) => {
     }
   }
 
-
-
   //check local storage; make sure the values are valid  
   const isUserSignedIn = () => {
     //if there's a user stored in storage don't display the form;

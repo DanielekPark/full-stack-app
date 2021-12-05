@@ -4,11 +4,10 @@ import {ProvideContext, useProvideContext} from '../context';
 import {CoursesDetail} from './CoursesDetail'; 
 
 export const Courses = () => {
-  const {fetchData, coursesData, setCoursesData, isSignedIn} = useProvideContext(ProvideContext);
+  const {fetchData, coursesData, setCoursesData} = useProvideContext(ProvideContext);
   React.useEffect(() => {
     fetchData('courses')
       .then((data) => setCoursesData(data))
-    console.log(isSignedIn)  
   }, []);
 
   return (
