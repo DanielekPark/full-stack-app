@@ -58,7 +58,7 @@ const AppProvider = ({children}) => {
       return;
     }else {
       console.log(checkEmail)
-      localStorage.setItem('user', JSON.stringify(userAccount));
+      localStorage.setItem('user', JSON.stringify(checkEmail));
       setIsSignedIn(true);  
     }
   }
@@ -68,11 +68,8 @@ const AppProvider = ({children}) => {
     //if there's a user stored in storage don't display the form;
     const user = JSON.parse(localStorage.getItem('user'));
 
-    if(!user) {
-      setIsSignedIn(false);
-    } else {
-      setIsSignedIn(true); 
-    }
+    if(user) setIsSignedIn(true); 
+    
   }
   
   const signOut = () => {

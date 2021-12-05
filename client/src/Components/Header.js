@@ -4,13 +4,19 @@ import UserSignIn from "./UserSignIn";
 import {ProvideContext, useProvideContext} from '../context';
 
 const Header = () => {
+  const [userName, setUserName] = React.useState([]); 
   const {isSignedIn, setIsSignedIn, isUserSignedIn, signOut} = useProvideContext(ProvideContext);
 
-  //useeffect to check if user signedin
+  React.useEffect(() => {
+    isUserSignedIn();    
+  }, []);
 
   React.useEffect(() => {
-    isUserSignedIn()
-  }, [])
+    if(isSignedIn){
+      const user = JSON.parse(localStorage.getItem('user'));
+      setUserName(user)
+    }
+  }, [isSignedIn])
 
   return (
     <div className="header">
@@ -19,7 +25,7 @@ const Header = () => {
         <nav>
           {isSignedIn ? 
             <>
-              <span>Welcome firstName lastName</span>
+              <span>Welcome {`${userName.firstName} ${userName.lastName}`}</span>
               <a className="signout" href="/signout" onClick={signOut}>Sign Out</a>
             </>
               : 
