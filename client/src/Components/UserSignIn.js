@@ -19,9 +19,6 @@ const UserSignIn = () => {
     isUserSignedIn(); 
   }, [])  
 
-  React.useEffect(() => {
-    console.log(userAccount)
-  }, [userAccount]);
 
   //const if(!isSignedIn) return <Redirect to="/signin" />  
   return (
