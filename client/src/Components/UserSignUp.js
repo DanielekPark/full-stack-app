@@ -3,7 +3,7 @@ import {ProvideContext, useProvideContext} from '../context';
 
 const UserSignUp = () => {
   
-  const {newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange} = useProvideContext(ProvideContext);
+  const {newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, isSignedIn, setIsSignedIn} = useProvideContext(ProvideContext);
 
   const catchErr = (err) => {
     console.log(err); 
@@ -26,8 +26,17 @@ const UserSignUp = () => {
       }); 
     const data = await response.json(); 
     localStorage.setItem('user', JSON.stringify(data)); 
-    window.location.href = '/'; 
+    setIsSignedIn(true)
   }
+
+  React.useEffect(() => { 
+    const user = JSON.parse(localStorage.getItem('user')); 
+    if(user) setIsSignedIn(true); 
+  }, [])
+
+  React.useEffect(() => {
+    if(isSignedIn) window.location.href= "/"; 
+  }, [isSignedIn]); 
 
   return (
     <div className="bounds">
