@@ -4,7 +4,7 @@ import {ProvideContext, useProvideContext} from '../context';
 
 export const CoursesDetail = () => {
   const [courseDetail, setCourseDetail] = React.useState([]); 
-  const {fetchData} = useProvideContext(ProvideContext); 
+  const {fetchData, cancelBtn} = useProvideContext(ProvideContext); 
   const {id} = useParams(); 
   //const {isSignedIn} = usePrivateRoute(); 
 
@@ -24,6 +24,7 @@ export const CoursesDetail = () => {
   React.useEffect(() => {
     fetchData(`courses/${id}`)
       .then((data) => setCourseDetail(data))
+      .catch((err) => cancelBtn())
   }, []);
 
   React.useEffect(() => {

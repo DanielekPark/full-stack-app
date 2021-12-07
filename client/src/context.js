@@ -30,7 +30,7 @@ const AppProvider = ({children}) => {
   }
 
   //when clicked redirects the user to the list of courses. 
-  const cancelBtn = () => window.location.href = '/courses'; 
+  const cancelBtn = () => window.location.href = '/'; 
   
   //CREATING COURSES; obj IS THE VALUE OF A REACT HOOK; method IS THE TYPE OF THE HTTP REQUEST
   const handleSubmit = async (event, obj, method) => {    

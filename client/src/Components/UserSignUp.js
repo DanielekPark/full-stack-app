@@ -26,7 +26,7 @@ const UserSignUp = () => {
       }); 
     const data = await response.json(); 
     localStorage.setItem('user', JSON.stringify(data)); 
-    window.location.href = '/courses'; 
+    window.location.href = '/'; 
   }
 
   return (
