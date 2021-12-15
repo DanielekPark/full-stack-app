@@ -24,7 +24,7 @@ export const UpdateCourse = () => {
     const data = await response.json(response);
   }  
   React.useEffect(() => {
-    console.log(course);
+    document.title = "Update A Course"; 
   }, []); 
 
   React.useEffect(() => {

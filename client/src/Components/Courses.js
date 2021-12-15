@@ -5,7 +5,9 @@ import {CoursesDetail} from './CoursesDetail';
 
 export const Courses = () => {
   const {fetchData, coursesData, setCoursesData} = useProvideContext(ProvideContext);
+
   React.useEffect(() => {
+    document.title = "Courses"; 
     fetchData('courses')
       .then((data) => setCoursesData(data))
   }, []);

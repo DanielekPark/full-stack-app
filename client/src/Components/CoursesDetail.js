@@ -22,6 +22,7 @@ export const CoursesDetail = () => {
   const deleteCourse = () => fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
 
   React.useEffect(() => {
+    document.title = "Course Details"; 
     fetchData(`courses/${id}`)
       .then((data) => setCourseDetail(data))
       .catch((err) => cancelBtn())

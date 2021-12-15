@@ -30,6 +30,7 @@ const UserSignUp = () => {
   }
 
   React.useEffect(() => { 
+    document.title = "Sign Up"; 
     const user = JSON.parse(localStorage.getItem('user')); 
     if(user) setIsSignedIn(true); 
   }, [])

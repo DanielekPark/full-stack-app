@@ -9,6 +9,10 @@ const CreateCourse = () => {
 
   //if true return below; false redirect to signin 
 
+  React.useEffect(() => {
+    document.title = "Create A Course"; 
+  }, [])
+
   if(isSignedIn){
     return (
       <div className="bounds course--detail">

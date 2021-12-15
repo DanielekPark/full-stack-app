@@ -8,21 +8,21 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-
+const authentication = require("../middleware/authentication"); 
 //ENDPOINT/api/users 200
 
 //GET
-router.get("/", async (req, res) => {
+router.get("/", authentication, async (req, res) => {
   const users = await User.find().sort('firstName');
   res.send(users);
 });
 
-router.get("/:id", async (req, res) => {
-  //AUTHENICATE USER
-  const user = await User.findById(req.params.id);
-  if (user) return res.status(400).send("BAD REQUEST");
-  res.send(user);
-});
+// router.get("/:id", async (req, res) => {
+//   //AUTHENICATE USER
+//   const user = await User.findById(req.params.id);
+//   if (user) return res.status(400).send("BAD REQUEST");
+//   res.send(user);
+// });
 
 
 //POST

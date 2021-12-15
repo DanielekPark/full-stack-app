@@ -21,7 +21,7 @@ const AppProvider = ({children}) => {
       console.log(`There was a problem ${err}`); 
       throw Error(err); 
     }
-  }   
+  }
 
   //FOR CONTROLLED INPUTS, callback IS A REACT HOOK; obj IS THE VALUE OF THE HOOK
   const handleChange = (event, callback, obj) => {
