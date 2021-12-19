@@ -11,27 +11,26 @@ const UserSignIn = () => {
   // 1.
   //how to add authorization in the fetch request (FRONT END)
   //https://gist.github.com/ivermac/922def70ed9eaf83799b68ab1a587595  
-  /*
-  LOOK AT CLARK'S REPO
-  */
 
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`; 
 
-    const encodeCredentials = btoa(`${userAccount.emailAddress} : ${userAccount.password}`);
+    const encodeCredentials = btoa(`${userAccount.emailAddress}:${userAccount.password}`);
 
     try {
       const response = await fetch(url, 
         {
           method: 'GET',
           headers: {
-            Authorization: `Basic ${encodeCredentials}`, 
-            'Content-Type': 'application/json'
-          }
+            'Authorization': `Basic ${encodeCredentials}`, 
+            'Content-Type': 'application/json; charset=utf-8'
+          }, 
+          //body: JSON.stringify(encodeCredentials)
         }); 
-      return await response.json();
+        
+      // return await response.json();
     }catch (err) {
-      console.log(`There was a problem ${err}`); 
+      console.log(`${err}`); 
     }
   }
   
@@ -55,7 +54,7 @@ const UserSignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault(); 
     fetchData('users')
-      .then((users) => signIn(users))
+      .then((data) => signIn(data));
   }
 
   React.useEffect(() => {

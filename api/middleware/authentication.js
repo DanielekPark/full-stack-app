@@ -25,18 +25,16 @@ module.exports = async (req, res, next) => {
 
   const headers = req.headers.authorization;
   const authHeader = atob(headers)
-  console.log(req.headers)
+  console.log(authHeader)
 
-  const credentials = auth(req);
-  if(credentials){
-    console.log(credentials, 'credentials'); 
-    next(); 
-  }else {
-    const err = new Error('Authentication failed');
-    err.status = 401; 
-    console.log(credentials, 'failed'); 
-    return; 
-  }
+  // const credentials = auth(req);
+  // if(credentials){
+  //   console.log(credentials, 'credentials'); 
+  //   next(); 
+  // }else {
+  //   console.log(credentials, 'failed'); 
+  //   next(); 
+  // }
 
   // if(credentials) {
      // const user = await User.findOne({emailAddress: credentials}); 
