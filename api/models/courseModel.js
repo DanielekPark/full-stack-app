@@ -6,22 +6,10 @@ const courseSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  title: {
-    type: String, 
-    required: true, 
-    }, 
-  description: {
-    type: String, 
-    required: true,
-    },
-  estimatedTime: {
-    type: String,
-    required: true, 
-    },
-  materialsNeeded: {
-    type: String,
-    required: true,
-    }
+  title: {type: String}, 
+  description: {type: String},
+  estimatedTime: {type: String },
+  materialsNeeded: {type: String }
 }); 
 
 const Course = mongoose.model('course', courseSchema); 

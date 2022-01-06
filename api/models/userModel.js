@@ -2,26 +2,10 @@ const createError = require('http-errors');
 const mongoose = require('mongoose'); 
 
 const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String, 
-    required: true,
-    minLength: 3, 
-  },
-  lastName: {
-    type: String, 
-    required: true,
-    minLength: 3, 
-  }, 
-  emailAddress: {
-    type: String, 
-    required: true,
-    minLength: 5, 
-  }, 
-  password: {
-    type: String, 
-    required: true,
-    minLength: 7,
-  },  
+  firstName: {type: String},
+  lastName: {type: String }, 
+  emailAddress: {type: String }, 
+  password: {type: String }  
 }); 
 
 const User = mongoose.model('user', userSchema); 
