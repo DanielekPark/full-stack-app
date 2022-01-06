@@ -17,14 +17,6 @@ router.get("/", authentication, async (req, res) => {
   res.send(users);
 });
 
-// router.get("/:id", async (req, res) => {
-//   //AUTHENICATE USER
-//   const user = await User.findById(req.params.id);
-//   if (user) return res.status(400).send("BAD REQUEST");
-//   res.send(user);
-// });
-
-
 //POST
 router.post("/", async (req, res, next) => {
   try {
