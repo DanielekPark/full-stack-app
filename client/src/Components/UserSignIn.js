@@ -8,23 +8,17 @@ const UserSignIn = () => {
   //DELETE EITHER useProvideContext or isUserSignedIn
   //const {isSignedIn} = usePrivateRoute(); 
   
-  //prevent client from submiting empty values
-
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`;
-    
-    //PREVENT A USER FROM SUBMITTING EMPTY CREDENTIALS
-    // if(!userAccount.emailAddress || !userAccount.password) {
-    //   alert('Please check your email address or password');
-    //   return;  
-    // }
+    //authString needs to be hashed/encoded
+    const credential = `{"${userAccount.emailAddress}":"${userAccount.password}"}`;
 
     try {
       const response = await fetch(url, 
         {
           method: 'GET',
           headers: {
-            'Authorization': `Basic ${userAccount.emailAddress}:${userAccount.password}`,
+            'authorization': `Basic ${credential}`,
             'Content-Type': 'application/json; charset=utf-8'
           }, 
           //body: JSON.stringify()
@@ -32,11 +26,11 @@ const UserSignIn = () => {
         }); 
         
       const data = await response.json();
-      //combine parts of the signIn function for fetchData 
+      const user = await data?.find((person) => person.emailAddress === userAccount.emailAddress);
+      
+      localStorage.setItem('user', JSON.stringify(user)); 
     }catch (err) {
-      //use alert()
-      //alert(new Error(err)); 
-      alert('Credential error'); 
+      console.log('frontend error'); 
     }
   }
   // const signIn = async (users) => {
