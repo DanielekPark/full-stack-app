@@ -1,48 +1,41 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { User } = require("../models/userModel");
 const auth = require("basic-auth"); 
 const mongoose = require("mongoose"); 
-const http = require("http"); 
+const createError = require('http-errors'); 
 
 module.exports = async (req, res, next) => {
-  //authenticate routes for
-  // GET /api/users
-  // POST /api/courses
-  // PUT /api/coures/:id
-  // DELETE /api/courses/:id
-
-  //enter username and password IN THUNDERCAT
-  //use an authorization header
-  //https://www.geeksforgeeks.org/basic-authentication-in-node-js-using-http-header/
-  //2. 
-  //Pass a request object to the module export. 
-  //If parsing fails undefined is returned, otherwise an object with .name & .pass.
-  // => { name: 'something', pass: 'whatever' }
-
-  //3. if true 
-  //find the user using the email use model
-  //compare the passwords use bcrypt
-
   const headers = req.headers.authorization;
-  const authHeader = atob(headers)
-  console.log(authHeader)
+  console.log(headers)
+  //throw an error if credentials DON'T MATCH
+  //https://www.npmjs.com/package/http-errors
 
-  // const credentials = auth(req);
-  // if(credentials){
-  //   console.log(credentials, 'credentials'); 
-  //   next(); 
-  // }else {
-  //   console.log(credentials, 'failed'); 
-  //   next(); 
-  // }
+  //use email to look for users for the query
+  // const user = await User.findOne({emailAddress: headers})
 
-  // if(credentials) {
-     // const user = await User.findOne({emailAddress: credentials}); 
-     // const validPassword = await bcrypt.compare(user.password);
-  // }
-  
+  // if(!user){
+  //   return await next(createError(404, 'Error email or password'));
+  // } else {
+  //if email is found use bcrypt to compare password
+  //   const validPass = await bcrypt.compare(user.password, userPass); 
+  //   console.log(userEmail, userPass)
+  //   if(!validPass) return res.status(400).send('Invalid email or password'); 
+  //   next(); 
+  // } 
+
+  //set status 404 for GET courseRoute if a specific course is not retrieved
+  //set the location header for POST courseRoute to the URL
 }
 
-  //https://www.npmjs.com/package/basic-auth
-  //https://github.com/kyleines/Full-Stack-React-App-with-a-Rest-API
-  //https://github.com/cwinters8/Full-Stack-App
+  //pg 5 need 400 status codes
+  //need validation for creating a new user firstname, lastName, emailAddres, password; need to validate inputs; ROUTES
+  //need validation for creating a new course title & description; ROUTES
+  
+  //1. encrypt password
+  //2. use bcrypt to compare login password and database password
+
+
+  /*
+  https://github.com/cwinters8/Full-Stack-App/blob/master/client/src/Components/UserSignIn.js
+  https://github.com/cwinters8/Full-Stack-App/blob/master/api/routes.js
+  */ 

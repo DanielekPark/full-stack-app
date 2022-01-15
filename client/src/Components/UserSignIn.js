@@ -8,53 +8,58 @@ const UserSignIn = () => {
   //DELETE EITHER useProvideContext or isUserSignedIn
   //const {isSignedIn} = usePrivateRoute(); 
   
-  // 1.
-  //how to add authorization in the fetch request (FRONT END)
-  //https://gist.github.com/ivermac/922def70ed9eaf83799b68ab1a587595  
+  //prevent client from submiting empty values
 
   const fetchData = async (resource) => {
-    const url = `http://localhost:5001/api/${resource}`; 
-
-    const encodeCredentials = btoa(`${userAccount.emailAddress}:${userAccount.password}`);
+    const url = `http://localhost:5001/api/${resource}`;
+    
+    //PREVENT A USER FROM SUBMITTING EMPTY CREDENTIALS
+    // if(!userAccount.emailAddress || !userAccount.password) {
+    //   alert('Please check your email address or password');
+    //   return;  
+    // }
 
     try {
       const response = await fetch(url, 
         {
           method: 'GET',
           headers: {
-            'Authorization': `Basic ${encodeCredentials}`, 
+            'Authorization': `Basic ${userAccount.emailAddress}:${userAccount.password}`,
             'Content-Type': 'application/json; charset=utf-8'
           }, 
-          //body: JSON.stringify(encodeCredentials)
+          //body: JSON.stringify()
+          //if successfull place credentials in local storage
         }); 
         
-      // return await response.json();
+      const data = await response.json();
+      //combine parts of the signIn function for fetchData 
     }catch (err) {
-      console.log(`${err}`); 
+      //use alert()
+      //alert(new Error(err)); 
+      alert('Credential error'); 
     }
   }
-  
-  const signIn = async (users) => {
-    if(!userAccount.emailAddress && !userAccount.password) return;
-    const checkEmail = await users.find((item) => item.emailAddress === userAccount.emailAddress); 
-    const checkPassword = await users.find((item) => item.password === userAccount.password);
+  // const signIn = async (users) => {
+  //   if(!userAccount.emailAddress && !userAccount.password) return;
+  //   const checkEmail = await users?.find((item) => item.emailAddress === userAccount.emailAddress); //if users is null or undefined; optional chaining in case if don't have an array
+  //   const checkPassword = await users?.find((item) => item.password === userAccount.password);
 
-    //When signed in, the form is not displayed
-    if(!checkEmail || !checkPassword) {
-      alert('Please check your email and password');
-      return;
-    }else {
-      console.log(checkEmail)
-      localStorage.setItem('user', JSON.stringify(checkEmail));
-      setIsSignedIn(true);  
-    }
-  }  
+  //   //When signed in, the form is not displayed
+  //   if(!checkEmail || !checkPassword) {
+  //     alert('Please check your email and password');
+  //     return;
+  //   }else {
+  //     console.log(checkEmail)
+  //     localStorage.setItem('user', JSON.stringify(checkEmail));
+  //     setIsSignedIn(true);  
+  //   }
+  // }  
   
   //GET REQUEST user email & password, FOR SIGNING-IN
   const handleSubmit = (event) => {
     event.preventDefault(); 
     fetchData('users')
-      .then((data) => signIn(data));
+      // .then((data) => signIn(data));
   }
 
   React.useEffect(() => {
@@ -94,3 +99,4 @@ const UserSignIn = () => {
 }
 
 export default UserSignIn; 
+//

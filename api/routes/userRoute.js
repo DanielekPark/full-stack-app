@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 const express = require("express");
 const createError = require("http-errors");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const _ = require("lodash");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const authentication = require("../middleware/authentication"); 
+const authentication = require("../middleware/authentication");
 //ENDPOINT/api/users 200
 
 //GET
@@ -34,8 +34,6 @@ router.post("/", async (req, res, next) => {
     user.password = await bcrypt.hash(user.password, salt); 
     await user.save();
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY);
-
     const data = {
       _id: user._id, 
       firstName: user.firstName, 
@@ -44,7 +42,6 @@ router.post("/", async (req, res, next) => {
     }
     
     res
-      .header("auth-token", token)
       .location("/")
       .send(data);
   } catch (err) {
