@@ -7,12 +7,13 @@ const UserSignIn = () => {
 
   //DELETE EITHER useProvideContext or isUserSignedIn
   //const {isSignedIn} = usePrivateRoute(); 
-  
+
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`;
-    //authString needs to be hashed/encoded
+    //encrypt using crypto-js
+    //needs a key and encrypted data    
     const credential = `{"${userAccount.emailAddress}":"${userAccount.password}"}`;
-
+    
     try {
       const response = await fetch(url, 
         {
@@ -33,22 +34,7 @@ const UserSignIn = () => {
       console.log('frontend error'); 
     }
   }
-  // const signIn = async (users) => {
-  //   if(!userAccount.emailAddress && !userAccount.password) return;
-  //   const checkEmail = await users?.find((item) => item.emailAddress === userAccount.emailAddress); //if users is null or undefined; optional chaining in case if don't have an array
-  //   const checkPassword = await users?.find((item) => item.password === userAccount.password);
 
-  //   //When signed in, the form is not displayed
-  //   if(!checkEmail || !checkPassword) {
-  //     alert('Please check your email and password');
-  //     return;
-  //   }else {
-  //     console.log(checkEmail)
-  //     localStorage.setItem('user', JSON.stringify(checkEmail));
-  //     setIsSignedIn(true);  
-  //   }
-  // }  
-  
   //GET REQUEST user email & password, FOR SIGNING-IN
   const handleSubmit = (event) => {
     event.preventDefault(); 
@@ -93,4 +79,18 @@ const UserSignIn = () => {
 }
 
 export default UserSignIn; 
-//
+  // const signIn = async (users) => {
+  //   if(!userAccount.emailAddress && !userAccount.password) return;
+  //   const checkEmail = await users?.find((item) => item.emailAddress === userAccount.emailAddress); //if users is null or undefined; optional chaining in case if don't have an array
+  //   const checkPassword = await users?.find((item) => item.password === userAccount.password);
+
+  //   //When signed in, the form is not displayed
+  //   if(!checkEmail || !checkPassword) {
+  //     alert('Please check your email and password');
+  //     return;
+  //   }else {
+  //     console.log(checkEmail)
+  //     localStorage.setItem('user', JSON.stringify(checkEmail));
+  //     setIsSignedIn(true);  
+  //   }
+  // }
