@@ -2,20 +2,11 @@ import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
 
 const UserSignUp = () => {
-  
   const {newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, isSignedIn, setIsSignedIn} = useProvideContext(ProvideContext);
-
-  const catchErr = (err) => {
-    console.log(err); 
-    //alert(`please check your email and password`)
-  }
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
-    //return if length or passwords don't match:
-
     const url = "http://localhost:5001/api/users"; 
-    //try{}catch(err)
 
     const response = await fetch(url, 
       {
