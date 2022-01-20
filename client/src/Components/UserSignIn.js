@@ -1,35 +1,44 @@
 import React from "react";
-//import {Redirect} from "react-router-dom";
 import {ProvideContext, useProvideContext} from '../context';
+import CryptoJS from 'crypto-js';
+//import {Redirect} from "react-router-dom";
+// import bcrypt from 'bcryptjs'
 
 const UserSignIn = () => {
   const {cancelBtn, handleChange, userAccount, setUserAccount, isUserSignedIn, isSignedIn, setIsSignedIn} = useProvideContext(ProvideContext);
-
   //DELETE EITHER useProvideContext or isUserSignedIn
   //const {isSignedIn} = usePrivateRoute(); 
-
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`;
     //encrypt using crypto-js
-    //needs a key and encrypted data    
-    const credential = `{"${userAccount.emailAddress}":"${userAccount.password}"}`;
-    
+    //needs a key and encrypted data 
+    //TRY USING OBJECT ENCRYPTION 
+    //array of objects and a string
+    const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
+    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
+    const authArray = [ciphertext, userAccount.password]; 
+    // const hashedString = `${userAccount.emailAddress}:${userAccount.password}`; 
+    // const ciphertext = CryptoJS.AES.encrypt(hashedString, userAccount.password).toString();
+    // const salt = await bcrypt.genSalt(10); 
+    // const hashed = await bcrypt.hash(credential, salt);
+
     try {
       const response = await fetch(url, 
         {
           method: 'GET',
           headers: {
-            'authorization': `Basic ${credential}`,
+            'authorization': `Basic ${ciphertext} ${userAccount.password}`,
             'Content-Type': 'application/json; charset=utf-8'
           }, 
           //body: JSON.stringify()
           //if successfull place credentials in local storage
         }); 
-        
+
       const data = await response.json();
       const user = await data?.find((person) => person.emailAddress === userAccount.emailAddress);
       
       localStorage.setItem('user', JSON.stringify(user)); 
+      await setIsSignedIn(true); 
     }catch (err) {
       console.log('frontend error'); 
     }

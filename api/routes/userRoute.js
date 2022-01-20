@@ -1,16 +1,18 @@
 const { User } = require("../models/userModel");
-//const auth = require('../middleware/auth');
 const mongoose = require("mongoose");
 const express = require("express");
 const createError = require("http-errors");
 const router = express.Router();
+const authentication = require("../middleware/authentication");
+const CryptoJS = require("crypto-js"); 
+//const auth = require('../middleware/auth');
 const bcrypt = require("bcryptjs");
 const _ = require("lodash");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const authentication = require("../middleware/authentication");
-//ENDPOINT/api/users 200
 
+
+//ENDPOINT/api/users 200
 //GET
 router.get("/", authentication, async (req, res) => {
   const users = await User.find().sort('firstName');

@@ -18,6 +18,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res, next) => {
   //returns a course; including the user that owns the course for the provided course id
+  //set status 404 for GET courseRoute if a specific course is not retrieved
+  //set the location header for POST courseRoute to the URL
   try {
     const course = await Course.findById(req.params.id);
     res.send(course); 
