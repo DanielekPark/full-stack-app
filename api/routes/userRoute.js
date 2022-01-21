@@ -11,7 +11,6 @@ const _ = require("lodash");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
-
 //ENDPOINT/api/users 200
 //GET
 router.get("/", authentication, async (req, res) => {
@@ -25,15 +24,13 @@ router.post("/", async (req, res, next) => {
     let user = await User.findOne({ email: req.body.emailAddress });
     if (!user) return res.status(400).send("User already registered.");
 
-    user = new User({
+    user = await new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       emailAddress: req.body.emailAddress,
-      password: req.body.password,
+      password:req.body.password
     });
-
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt); 
+    user.password =  CryptoJS.AES.encrypt(user.password, user.password).toString(); 
     await user.save();
 
     const data = {

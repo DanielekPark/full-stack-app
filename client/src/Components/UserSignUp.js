@@ -1,5 +1,6 @@
 import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
+import{CryptoJS} from "crypto-js";
 
 const UserSignUp = () => {
   const {newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, isSignedIn, setIsSignedIn} = useProvideContext(ProvideContext);
@@ -8,6 +9,12 @@ const UserSignUp = () => {
     event.preventDefault(); 
     const url = "http://localhost:5001/api/users"; 
 
+    //PG 6
+    //POST ROUTE USER
+    //encrypt password (in the database) when signing up 
+    /*
+    //hash password and use localstorage to have user signedin
+    */ 
     const response = await fetch(url, 
       {
         method: 'POST',

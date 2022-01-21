@@ -16,11 +16,8 @@ const UserSignIn = () => {
     //array of objects and a string
     const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
     const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
-    const authArray = [ciphertext, userAccount.password]; 
     // const hashedString = `${userAccount.emailAddress}:${userAccount.password}`; 
     // const ciphertext = CryptoJS.AES.encrypt(hashedString, userAccount.password).toString();
-    // const salt = await bcrypt.genSalt(10); 
-    // const hashed = await bcrypt.hash(credential, salt);
 
     try {
       const response = await fetch(url, 
