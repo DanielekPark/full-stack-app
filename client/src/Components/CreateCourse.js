@@ -11,7 +11,11 @@ const CreateCourse = () => {
 
   React.useEffect(() => {
     document.title = "Create A Course"; 
+    const user = JSON.parse(localStorage.getItem('user')); 
+    console.log(user)
   }, [])
+  //create a function to create a course
+  //include user in localstorage for authentication header
 
   if(isSignedIn){
     return (

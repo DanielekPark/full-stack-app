@@ -1,5 +1,5 @@
 const {Course} = require('../models/courseModel'); 
-//const auth = require('../middleware/auth');
+const authentication = require("../middleware/authentication");
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();

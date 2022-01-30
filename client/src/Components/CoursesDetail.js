@@ -41,7 +41,7 @@ export const CoursesDetail = () => {
                 <a className="button" href={`/courses/${id}/update`}>Update Course</a>
                 <a onClick={deleteCourse} className="button" href="/">Delete Course</a>                
               </span>  
-              <a className="button button-secondary" href="/courses">Return to List</a>
+              <a className="button button-secondary" href="/">Return to List</a>
             </div>
           </div>
         </div>

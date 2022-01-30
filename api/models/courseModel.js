@@ -11,11 +11,11 @@ const { User } = require("./userModel");
 //   estimatedTime: {type: String },
 //   materialsNeeded: {type: String }
 // }); 
+
 const courseSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
   },
   title: {
     type: String, 
@@ -30,9 +30,13 @@ const courseSchema = new mongoose.Schema({
     },
   estimatedTime: {
     type: String, 
-    },
+    required: true,
+    minLength: 5,    
+  },
   materialsNeeded: {
-    type: String
+    type: String,
+    required: true,
+    minLength: 5,
     }
 }); 
 const Course = mongoose.model('course', courseSchema); 

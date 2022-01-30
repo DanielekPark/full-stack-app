@@ -3,6 +3,7 @@ import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
 import {useParams} from "react-router-dom";
 import { usePrivateRoute } from "../usePrivateRoute";
+import CryptoJS from 'crypto-js';
 
 export const UpdateCourse = () => {
   const {cancelBtn, handleChange, course, setCourse} = useProvideContext(ProvideContext);
@@ -15,14 +16,32 @@ export const UpdateCourse = () => {
     event.preventDefault(); 
     // const url = `http://localhost:5001/api/courses/${id}`; 
 
-    const response = await fetch(url, 
+   /* const response = await fetch(url, 
       {
         method: method,
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(obj) 
       }); 
     const data = await response.json(response);
+ */
+  
+    const userData = JSON.parse(localStorage.getItem('user'));  
+    const arry = [{email: userData.emailAddress}, {key: userData.password}]; 
+    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(arry), userData.key).toString(); 
+    const response = await fetch(url, 
+      {
+        method: method,
+        headers: {
+          'authorization': `Basic ${ciphertext} ${data[1].key}`,
+          'Content-Type': 'application/json'},
+        body: JSON.stringify(obj) 
+      }); 
+    //may not need code below  
+    const data = await response.json(response); 
+ 
+
   }  
+
   React.useEffect(() => {
     document.title = "Update A Course"; 
   }, []); 
