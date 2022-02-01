@@ -15,16 +15,21 @@ const UserSignUp = () => {
     /*
     //hash password and use localstorage to have user signedin
     */ 
-    const response = await fetch(url, 
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'},
-        body: JSON.stringify(newUser) 
-      }); 
-    const data = await response.json(); 
-    localStorage.setItem('user', JSON.stringify(data)); 
-    setIsSignedIn(true)
+    try {
+      const response = await fetch(url, 
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'},
+          body: JSON.stringify(newUser) 
+        }); 
+      const data = await response.json(); 
+      localStorage.setItem('user', JSON.stringify(data)); 
+      setIsSignedIn(true)      
+    }catch(err){
+      alert('email registered')
+    }
+
   }
 
   React.useEffect(() => { 

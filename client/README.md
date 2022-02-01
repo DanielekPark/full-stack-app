@@ -69,6 +69,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+Package used for hashing
+//https://www.npmjs.com/package/crypto-js
+//https://www.geeksforgeeks.org/what-is-crypto-module-in-node-js-and-how-it-is-used/
+
 cd documents/fs/full-stack-app/api
 
 export fsa_jwtPrivateKey=mySecureKey

@@ -1,21 +1,46 @@
 import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
 import { usePrivateRoute } from "../usePrivateRoute";
+import CryptoJS from "crypto-js";
 
 const CreateCourse = () => {
-  const {cancelBtn, handleChange, handleSubmit, course, setCourse} = useProvideContext(ProvideContext);
-
+  const {cancelBtn, course, setCourse, userAccount} = useProvideContext(ProvideContext);
   const {isSignedIn, isUserSignedIn} = usePrivateRoute(); 
-
-  //if true return below; false redirect to signin 
+  const user = JSON.parse(localStorage.getItem('user')); 
+  const key = JSON.parse(localStorage.getItem('key'));
 
   React.useEffect(() => {
     document.title = "Create A Course"; 
-    const user = JSON.parse(localStorage.getItem('user')); 
     console.log(user)
   }, [])
-  //create a function to create a course
-  //include user in localstorage for authentication header
+
+  //CALLBACK IS A REACT HOOK
+  const handleChange = (event, callback, obj) => {
+    const name = event.target.name; 
+    callback({...obj, [name]: event.target.value}); 
+  }
+
+  const handleSubmit = async (event, obj, method) => {    
+    event.preventDefault(); 
+    const url = "http://localhost:5001/api/courses"; 
+    try {
+      const data = [{email: user.emailAddress}, {key: key.key}]; 
+      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), key.key).toString();
+      const response = await fetch(url, 
+        {
+          method: method,
+          headers: {
+            'authorization': `Basic ${ciphertext} ${key.key}`,
+            'Content-Type': 'application/json; charset=utf-8'},
+          body: JSON.stringify(obj) 
+        }); 
+      return await response.json(response);
+    }catch (err){
+      console.log('create course error')
+    }
+
+  }    
+
 
   if(isSignedIn){
     return (

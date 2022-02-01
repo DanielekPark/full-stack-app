@@ -8,23 +8,25 @@ const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose"); 
 
 module.exports = async (req, res, next) => {
-  const header = req.headers.authorization;
-  //https://www.npmjs.com/package/crypto-js
-  //https://www.geeksforgeeks.org/what-is-crypto-module-in-node-js-and-how-it-is-used/   
+  const header = req.headers.authorization;  
   const cred = header.split(' ').slice(1); 
   const bytes = CryptoJS.AES.decrypt(cred[0], cred[1]);
   const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  console.log(decryptedData)
   const user = await User.findOne({emailAddress: decryptedData[0].email}); 
-
+  // console.log(user)
   if(user){    
     //DECRYPTED USER PASSWORD FROM SIGNIN    
     const signInPass = decryptedData[1].key; 
     const cipherText = CryptoJS.AES.decrypt(user.password, cred[1]);
     const userPass = cipherText.toString(CryptoJS.enc.Utf8);
+    // console.log(userPass)
+    // console.log(signInPass)
     if(signInPass === userPass){
       next(); 
     }else {
       next(createError(400, `password doesn't match`));
+      console.log('failed')
     }
 
   }else {

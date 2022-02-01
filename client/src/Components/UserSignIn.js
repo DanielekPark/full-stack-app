@@ -1,7 +1,6 @@
 import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
 import CryptoJS from 'crypto-js';
-//import {Redirect} from "react-router-dom";
 // import bcrypt from 'bcryptjs'
 
 const UserSignIn = () => {
@@ -16,8 +15,6 @@ const UserSignIn = () => {
     //array of objects and a string
     const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
     const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
-    // const hashedString = `${userAccount.emailAddress}:${userAccount.password}`; 
-    // const ciphertext = CryptoJS.AES.encrypt(hashedString, userAccount.password).toString();
 
     try {
       const response = await fetch(url, 
@@ -35,9 +32,11 @@ const UserSignIn = () => {
       const user = await data?.find((person) => person.emailAddress === userAccount.emailAddress);
       
       localStorage.setItem('user', JSON.stringify(user)); 
+      localStorage.setItem('key', userAccount.password)
       await setIsSignedIn(true); 
     }catch (err) {
       console.log('frontend error'); 
+      //alert('please check your email and password')
     }
   }
 

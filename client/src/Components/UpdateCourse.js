@@ -16,14 +16,24 @@ export const UpdateCourse = () => {
     event.preventDefault(); 
     // const url = `http://localhost:5001/api/courses/${id}`; 
 
-   /* const response = await fetch(url, 
+  /*
+  const handleSubmit = async (event, obj, method) => {    
+    event.preventDefault(); 
+    const url = "http://localhost:5001/api/courses"; 
+    const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
+    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
+    const response = await fetch(url, 
       {
         method: method,
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'authorization': `Basic ${ciphertext} ${userAccount.password}`,
+          'Content-Type': 'application/json'},
         body: JSON.stringify(obj) 
       }); 
     const data = await response.json(response);
- */
+  }    
+  //include user in localstorage for authentication header
+  */  
   
     const userData = JSON.parse(localStorage.getItem('user'));  
     const arry = [{email: userData.emailAddress}, {key: userData.password}]; 
@@ -38,7 +48,6 @@ export const UpdateCourse = () => {
       }); 
     //may not need code below  
     const data = await response.json(response); 
- 
 
   }  
 

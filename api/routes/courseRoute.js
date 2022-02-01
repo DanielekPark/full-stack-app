@@ -30,7 +30,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 //POST
-router.post('/', async (req, res, next) => {
+router.post('/', authentication, async (req, res, next) => {
   try {
     let course = new Course({
       user: req.body._id,
