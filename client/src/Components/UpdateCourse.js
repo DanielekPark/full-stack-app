@@ -10,39 +10,40 @@ export const UpdateCourse = () => {
   const {id} = useParams();
 
   const {isSignedIn, isUserSignedIn} = usePrivateRoute(); 
+  const courseToUpdate = JSON.parse(localStorage.getItem('dataToUpdate')); 
 
   const url = `http://localhost:5001/api/courses/${id}`; 
   const handleSubmit = async (event, obj, method) => {    
     event.preventDefault(); 
     // const url = `http://localhost:5001/api/courses/${id}`; 
-
-  /*
-  const handleSubmit = async (event, obj, method) => {    
-    event.preventDefault(); 
-    const url = "http://localhost:5001/api/courses"; 
-    const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
-    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
-    const response = await fetch(url, 
-      {
-        method: method,
-        headers: {
-          'authorization': `Basic ${ciphertext} ${userAccount.password}`,
-          'Content-Type': 'application/json'},
-        body: JSON.stringify(obj) 
-      }); 
-    const data = await response.json(response);
-  }    
-  //include user in localstorage for authentication header
-  */  
+    /*
+    const handleSubmit = async (event, obj, method) => {    
+      event.preventDefault(); 
+      const url = "http://localhost:5001/api/courses"; 
+      const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
+      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
+      const response = await fetch(url, 
+        {
+          method: method,
+          headers: {
+            'authorization': `Basic ${ciphertext} ${userAccount.password}`,
+            'Content-Type': 'application/json'},
+          body: JSON.stringify(obj) 
+        }); 
+      const data = await response.json(response);
+    }    
+    //include user in localstorage for authentication header
+    */  
   
     const userData = JSON.parse(localStorage.getItem('user'));  
-    const arry = [{email: userData.emailAddress}, {key: userData.password}]; 
-    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(arry), userData.key).toString(); 
+    //
+    // const arry = [{email: userData.emailAddress}, {key: userData.password}]; 
+    // const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(arry), userData.key).toString(); 
     const response = await fetch(url, 
       {
         method: method,
         headers: {
-          'authorization': `Basic ${ciphertext} ${data[1].key}`,
+          // 'authorization': `Basic ${ciphertext} ${data[1].key}`,
           'Content-Type': 'application/json'},
         body: JSON.stringify(obj) 
       }); 
@@ -53,14 +54,13 @@ export const UpdateCourse = () => {
 
   React.useEffect(() => {
     document.title = "Update A Course"; 
+    setCourse(courseToUpdate)
   }, []); 
 
   React.useEffect(() => {
     console.log(course);
   }, [course]); 
   
-  //const if(!isSignedIn) return <Redirect to="/signin" />
-
   if(isSignedIn){
     return (
       <div className="bounds course--detail">
@@ -72,15 +72,15 @@ export const UpdateCourse = () => {
                 <h4 className="course--label">Course</h4>
                 <div>
                   {/* <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={this.state.title} /> */}
-                  <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)}/>                
+                  <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)} value={course.title} />                
                 </div>
                 {/* <p>By {this.state.user}</p> */}
-                <p>By user name</p>
+                <p>By Needs to be edited to include user name</p>
               </div>
               <div className="course--description">
                 <div>
                   {/* <textarea id="description" name="description" placeholder="Course description..." value={this.state.description} onChange={event => this.handleFormChange('description', event)} /> */}
-                  <textarea id="description" name="description" placeholder="Course description..." onChange={(event) => handleChange(event, setCourse, course)}/>                
+                  <textarea id="description" name="description" placeholder="Course description..." onChange={(event) => handleChange(event, setCourse, course)} value={course.description}/>                
                 </div>
               </div>
             </div>
@@ -91,14 +91,14 @@ export const UpdateCourse = () => {
                     <h4>Estimated Time</h4>
                     <div>
                       {/* <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={this.state.estimatedTime} /> */}
-                      <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange={(event) => handleChange(event, setCourse, course)}/>                    
+                      <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange={(event) => handleChange(event, setCourse, course)} value={course.estimatedTime} />                    
                     </div>
                   </li>
                   <li className="course--stats--list--item">
                     <h4>Materials Needed</h4>
                     <div>
                       {/* <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." value={this.state.materialsNeeded} onChange={event => this.handleFormChange('materialsNeeded', event)} /> */}
-                      <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." onChange={(event) => handleChange(event, setCourse, course)}/>                    
+                      <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." onChange={(event) => handleChange(event, setCourse, course)} value={course.materialsNeeded} />                    
                     </div>
                   </li>
                 </ul>

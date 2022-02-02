@@ -38,6 +38,8 @@ export const CoursesDetail = () => {
   }    
   //include user in localstorage for authentication header
   */  
+
+  const storeData = () => localStorage.setItem('dataToUpdate', JSON.stringify(courseDetail));
  
   const deleteCourse = () => fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
 
@@ -58,7 +60,7 @@ export const CoursesDetail = () => {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <a className="button" href={`/courses/${id}/update`}>Update Course</a>
+                <a className="button" onClick={storeData} href={`/courses/${id}/update`}>Update Course</a>
                 <a onClick={deleteCourse} className="button" href="/">Delete Course</a>                
               </span>  
               <a className="button button-secondary" href="/">Return to List</a>
