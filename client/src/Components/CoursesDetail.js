@@ -6,41 +6,9 @@ export const CoursesDetail = () => {
   const [courseDetail, setCourseDetail] = React.useState([]); 
   const {fetchData, cancelBtn} = useProvideContext(ProvideContext); 
   const {id} = useParams(); 
-  //const {isSignedIn} = usePrivateRoute(); 
-
-  //User Authorization
-  /*
-  {isSignedIn && id === courseDetail.user ? 
-    <span>
-      <a className="button" href={`/courses/${id}/update`}>Update Course</a>
-      <a onClick={deleteCourse} className="button" href="/">Delete Course</a>                
-    </span> 
-    :
-    null} 
-  */ 
-
-  /*USE CODE BELOW FOR DELETE REQUESTS
-
-  const handleSubmit = async (event, obj, method) => {    
-    event.preventDefault(); 
-    const url = "http://localhost:5001/api/courses"; 
-    const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
-    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
-    const response = await fetch(url, 
-      {
-        method: method,
-        headers: {
-          'authorization': `Basic ${ciphertext} ${userAccount.password}`,
-          'Content-Type': 'application/json'},
-        body: JSON.stringify(obj) 
-      }); 
-    const data = await response.json(response);
-  }    
-  //include user in localstorage for authentication header
-  */  
 
   const storeData = () => localStorage.setItem('dataToUpdate', JSON.stringify(courseDetail));
- 
+
   const deleteCourse = () => fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
 
   React.useEffect(() => {
@@ -50,9 +18,9 @@ export const CoursesDetail = () => {
       .catch((err) => cancelBtn())
   }, []);
 
-  React.useEffect(() => {
-    console.log(courseDetail);
-  }, [courseDetail]); 
+  // React.useEffect(() => {
+  //   console.log(courseDetail);
+  // }, [courseDetail]); 
 
   return (
       <div>
@@ -98,4 +66,37 @@ export const CoursesDetail = () => {
         </div>
       </div>        
   )  
-}
+}  
+
+//const {isSignedIn} = usePrivateRoute(); 
+
+  //User Authorization
+  /*
+  {isSignedIn && id === courseDetail.user ? 
+    <span>
+      <a className="button" href={`/courses/${id}/update`}>Update Course</a>
+      <a onClick={deleteCourse} className="button" href="/">Delete Course</a>                
+    </span> 
+    :
+    null} 
+  */ 
+
+  /*USE CODE BELOW FOR DELETE REQUESTS
+
+  const handleSubmit = async (event, obj, method) => {    
+    event.preventDefault(); 
+    const url = "http://localhost:5001/api/courses"; 
+    const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
+    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
+    const response = await fetch(url, 
+      {
+        method: method,
+        headers: {
+          'authorization': `Basic ${ciphertext} ${userAccount.password}`,
+          'Content-Type': 'application/json'},
+        body: JSON.stringify(obj) 
+      }); 
+    const data = await response.json(response);
+  }    
+  //include user in localstorage for authentication header
+  */  

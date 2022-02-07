@@ -14,6 +14,10 @@ const CreateCourse = () => {
     console.log(user)
   }, [])
 
+  React.useEffect(() => {
+    console.log(course)
+  }, [course])
+
   //CALLBACK IS A REACT HOOK
   const handleChange = (event, callback, obj) => {
     const name = event.target.name; 
@@ -24,23 +28,22 @@ const CreateCourse = () => {
     event.preventDefault(); 
     const url = "http://localhost:5001/api/courses"; 
     try {
-      const data = [{email: user.emailAddress}, {key: key.key}]; 
-      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), key.key).toString();
+      // const data = [{email: user.emailAddress}, {key: key.key}]; 
+      // const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), key.key).toString();
       const response = await fetch(url, 
         {
           method: method,
           headers: {
-            'authorization': `Basic ${ciphertext} ${key.key}`,
-            'Content-Type': 'application/json; charset=utf-8'},
+            // 'authorization': `Basic ${ciphertext} ${key.key}`,
+            'Content-Type': 'application/json'},
           body: JSON.stringify(obj) 
         }); 
-      return await response.json(response);
+      return await response.json();
     }catch (err){
       console.log('create course error')
     }
 
   }    
-
 
   if(isSignedIn){
     return (
@@ -53,7 +56,7 @@ const CreateCourse = () => {
                 <h4 className="course--label">Course</h4>
                 <div>
                   {/* <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={this.state.title} /> */}
-                  <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)}/>                
+                  <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)} />                
                 </div>
                 {/* <p>By {this.state.user}</p> */}
                 <p>By user name</p>
