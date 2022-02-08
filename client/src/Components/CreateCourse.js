@@ -59,7 +59,6 @@ const CreateCourse = () => {
                   <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)} />                
                 </div>
                 {/* <p>By {this.state.user}</p> */}
-                <p>By user name</p>
               </div>
               <div className="course--description">
                 <div>
@@ -91,7 +90,7 @@ const CreateCourse = () => {
             <div className="grid-100 pad-bottom">
               {/* <button className="button" type="submit" onClick={this.updateOrCreateCourse}>{this.getAction(true)} Course</button>
               <button className="button button-secondary" onClick={this.goToCourse}>Cancel</button> */}
-              <button className="button" type="submit">Create Course</button>
+              <button className="button" type="submit" onClick={cancelBtn}>Create Course</button>
               <button className="button button-secondary" onClick={cancelBtn}>Cancel</button>            
             </div>
           </form>

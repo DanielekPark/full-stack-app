@@ -15,41 +15,16 @@ export const UpdateCourse = () => {
   const url = `http://localhost:5001/api/courses/${id}`; 
   const handleSubmit = async (event, obj, method) => {    
     event.preventDefault(); 
-    // const url = `http://localhost:5001/api/courses/${id}`; 
-    /*
-    const handleSubmit = async (event, obj, method) => {    
-      event.preventDefault(); 
-      const url = "http://localhost:5001/api/courses"; 
-      const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
-      const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
-      const response = await fetch(url, 
-        {
-          method: method,
-          headers: {
-            'authorization': `Basic ${ciphertext} ${userAccount.password}`,
-            'Content-Type': 'application/json'},
-          body: JSON.stringify(obj) 
-        }); 
-      const data = await response.json(response);
-    }    
-    //include user in localstorage for authentication header
-    */  
-  
+
     const userData = JSON.parse(localStorage.getItem('user'));  
-    //
-    // const arry = [{email: userData.emailAddress}, {key: userData.password}]; 
-    // const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(arry), userData.key).toString(); 
     const response = await fetch(url, 
       {
         method: method,
         headers: {
-          // 'authorization': `Basic ${ciphertext} ${data[1].key}`,
           'Content-Type': 'application/json'},
         body: JSON.stringify(obj) 
       }); 
-    //may not need code below  
     const data = await response.json(response); 
-
   }  
 
   React.useEffect(() => {
@@ -107,7 +82,7 @@ export const UpdateCourse = () => {
             <div className="grid-100 pad-bottom">
               {/* <button className="button" type="submit" onClick={this.updateOrCreateCourse}>{this.getAction(true)} Course</button>
               <button className="button button-secondary" onClick={this.goToCourse}>Cancel</button> */}
-              <button className="button" type="submit">Update</button>
+              <button className="button" type="submit" onClick={cancelBtn}>Update</button>
               <button className="button button-secondary" onClick={cancelBtn}>Cancel</button>            
             </div>
           </form>
@@ -118,3 +93,22 @@ export const UpdateCourse = () => {
     return <h1>Please sign in</h1>
   }  
 }
+// const url = `http://localhost:5001/api/courses/${id}`; 
+/*
+const handleSubmit = async (event, obj, method) => {    
+  event.preventDefault(); 
+  const url = "http://localhost:5001/api/courses"; 
+  const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
+  const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
+  const response = await fetch(url, 
+    {
+      method: method,
+      headers: {
+        'authorization': `Basic ${ciphertext} ${userAccount.password}`,
+        'Content-Type': 'application/json'},
+      body: JSON.stringify(obj) 
+    }); 
+  const data = await response.json(response);
+}    
+//include user in localstorage for authentication header
+*/ 
