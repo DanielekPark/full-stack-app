@@ -71,14 +71,9 @@ const AppProvider = ({children}) => {
     if(user) setIsSignedIn(true); 
     
   }
-  
-  const signOut = () => {
-    localStorage.removeItem('user');  
-    setIsSignedIn(false); 
-  }
 
   return (
-    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, userAccount, setUserAccount, isSignedIn, setIsSignedIn, isUserSignedIn, signIn, signOut}}>
+    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, userAccount, setUserAccount, isSignedIn, setIsSignedIn, isUserSignedIn, signIn}}>
       {children}
     </ProvideContext.Provider>
   );

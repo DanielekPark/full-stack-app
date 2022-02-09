@@ -9,12 +9,6 @@ const UserSignUp = () => {
     event.preventDefault(); 
     const url = "http://localhost:5001/api/users"; 
 
-    //PG 6
-    //POST ROUTE USER
-    //encrypt password (in the database) when signing up 
-    /*
-    //hash password and use localstorage to have user signedin
-    */ 
     try {
       const response = await fetch(url, 
         {

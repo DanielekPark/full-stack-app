@@ -21,12 +21,13 @@ function App() {
       <Header />
       <Switch>
         <Route exact path='/'><Courses /></Route>
-        <Route path="/coursedetail/:id"><CoursesDetail /></Route>
+        <Route path='/courses/create'><CreateCourse /></Route>
+        <Route path='/courses/:id/update'><UpdateCourse /></Route>
+        <Route path="/courses/:id"><CoursesDetail /></Route>
         <Route path='/signin'><UserSignIn /></Route> 
         <Route path='/signup'><UserSignUp /></Route>
         <Route path='/signout'><UserSignOut /></Route>
-        <Route path='/courses/create'><CreateCourse /></Route>
-        <Route path='/courses/:id/update'><UpdateCourse /></Route>
+
         <Route component={NotFound}></Route>
       </Switch>
     </BrowserRouter>  
@@ -40,5 +41,4 @@ userRoute /:id NOT NEEDED?
 src/Components/UserSignOut.js
 src/usePrivateRoute.js
   Line 8:47:  React Hook React.useEffect has a missing dependency: 'setIsSignedIn'. Either include it or remove the dependency array
-ask about consulting position
 */ 

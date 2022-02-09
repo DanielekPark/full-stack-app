@@ -21,12 +21,12 @@ const Header = () => {
   return (
     <div className="header">
       <div className="bounds">
-        <h1 className="header--logo">Courses</h1>
+        <a href="/"><h1 className="header--logo">Courses</h1></a>
         <nav>
           {isSignedIn ? 
             <>
               <span>Welcome {`${userName.firstName} ${userName.lastName}`}</span>
-              <a className="signout" href="/signout" onClick={signOut}>Sign Out</a>
+              <a className="signout" href="/signout">Sign Out</a>
             </>
               : 
             <>

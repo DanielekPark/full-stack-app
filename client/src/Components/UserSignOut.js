@@ -1,7 +1,7 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
 import {ProvideContext, useProvideContext} from '../context';
-
+import {Courses} from './Courses'; 
 const UserSignOut = () => {
   const {setIsSignedIn} = useProvideContext(ProvideContext);
   
@@ -10,7 +10,7 @@ const UserSignOut = () => {
     localStorage.removeItem('user'); 
   }, []); 
 
-  return <Redirect to='/' />
+  return <Redirect to="/" />
 }
 
 export default UserSignOut; 

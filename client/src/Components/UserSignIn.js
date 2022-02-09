@@ -56,7 +56,6 @@ const UserSignIn = () => {
     if(isSignedIn) window.location.href= "/"; 
   }, [isSignedIn]); 
 
-  //const if(!isSignedIn) return <Redirect to="/signin" />  
   return (
     <div className="bounds">
       <div className="grid-33 centered signin">
