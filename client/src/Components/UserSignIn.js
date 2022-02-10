@@ -9,10 +9,7 @@ const UserSignIn = () => {
   //const {isSignedIn} = usePrivateRoute(); 
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`;
-    //encrypt using crypto-js
-    //needs a key and encrypted data 
-    //TRY USING OBJECT ENCRYPTION 
-    //array of objects and a string
+
     const data = [{email: userAccount.emailAddress}, {key: userAccount.password}]; 
     const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), userAccount.password).toString();
 
@@ -35,8 +32,7 @@ const UserSignIn = () => {
       localStorage.setItem('key', userAccount.password)
       await setIsSignedIn(true); 
     }catch (err) {
-      console.log('frontend error'); 
-      //alert('please check your email and password')
+      alert('please check your email and password'); 
     }
   }
 

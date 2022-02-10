@@ -5,11 +5,6 @@ const createError = require("http-errors");
 const router = express.Router();
 const authentication = require("../middleware/authentication");
 const CryptoJS = require("crypto-js"); 
-//const auth = require('../middleware/auth');
-const bcrypt = require("bcryptjs");
-const _ = require("lodash");
-const jwt = require("jsonwebtoken");
-const config = require("config");
 
 //ENDPOINT/api/users 200
 //GET

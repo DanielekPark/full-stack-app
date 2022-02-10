@@ -27,7 +27,6 @@ function App() {
         <Route path='/signin'><UserSignIn /></Route> 
         <Route path='/signup'><UserSignUp /></Route>
         <Route path='/signout'><UserSignOut /></Route>
-
         <Route component={NotFound}></Route>
       </Switch>
     </BrowserRouter>  

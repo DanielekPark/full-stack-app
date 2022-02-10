@@ -10,7 +10,6 @@ const AppProvider = ({children}) => {
   const [confirmPassword, setConfirmPassword] = React.useState(''); 
   const [isSignedIn, setIsSignedIn] = React.useState(false); 
   
-
   //GET REQUEST FOR USERS
   const fetchData = async (resource) => {
     const url = `http://localhost:5001/api/${resource}`; 
@@ -46,23 +45,6 @@ const AppProvider = ({children}) => {
     const data = await response.json(response);
   }  
 
-  //CHECK USER'S EMAIL & PASSWORD
-  const signIn = async (users) => {
-    if(!userAccount.emailAddress && !userAccount.password) return;
-    const checkEmail = await users.find((item) => item.emailAddress === userAccount.emailAddress); 
-    const checkPassword = await users.find((item) => item.password === userAccount.password);
-
-    //When signed in, the form is not displayed
-    if(!checkEmail || !checkPassword) {
-      alert('Please check your email and password');
-      return;
-    }else {
-      console.log(checkEmail)
-      localStorage.setItem('user', JSON.stringify(checkEmail));
-      setIsSignedIn(true);  
-    }
-  }
-
   //check local storage; make sure the values are valid  
   const isUserSignedIn = () => {
     //if there's a user stored in storage don't display the form;
@@ -73,7 +55,7 @@ const AppProvider = ({children}) => {
   }
 
   return (
-    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, userAccount, setUserAccount, isSignedIn, setIsSignedIn, isUserSignedIn, signIn}}>
+    <ProvideContext.Provider value={{fetchData, setCoursesData, coursesData, newUser, setNewUser, cancelBtn, confirmPassword, setConfirmPassword, handleChange, course, setCourse, handleSubmit, userAccount, setUserAccount, isSignedIn, setIsSignedIn, isUserSignedIn}}>
       {children}
     </ProvideContext.Provider>
   );
@@ -81,3 +63,19 @@ const AppProvider = ({children}) => {
 
 export const useProvideContext = () => React.useContext(ProvideContext); 
 export {ProvideContext, AppProvider}
+  //CHECK USER'S EMAIL & PASSWORD
+  // const signIn = async (users) => {
+  //   if(!userAccount.emailAddress && !userAccount.password) return;
+  //   const checkEmail = await users.find((item) => item.emailAddress === userAccount.emailAddress); 
+  //   const checkPassword = await users.find((item) => item.password === userAccount.password);
+
+  //   //When signed in, the form is not displayed
+  //   if(!checkEmail || !checkPassword) {
+  //     alert('Please check your email and password');
+  //     return;
+  //   }else {
+  //     console.log(checkEmail)
+  //     localStorage.setItem('user', JSON.stringify(checkEmail));
+  //     setIsSignedIn(true);  
+  //   }
+  // }
