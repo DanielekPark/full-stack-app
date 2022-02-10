@@ -8,6 +8,8 @@ const UserSignOut = () => {
   React.useEffect(() => {
     setIsSignedIn(false)
     localStorage.removeItem('user'); 
+    localStorage.removeItem('key');
+    localStorage.removeItem('dataToUpdate'); 
   }, []); 
 
   return <Redirect to="/" />
