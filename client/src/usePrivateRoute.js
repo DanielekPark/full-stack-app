@@ -26,13 +26,3 @@ export const usePrivateRoute = () => {
 
   return {isSignedIn, setIsSignedIn, isUserSignedIn}; 
 }
-  //DELETE EITHER useProvideContext or isUserSignedIn
-  //const {isUserSignedIn, isSignedIn} = useProvideContext(ProvideContext);
-//HIGHER ORDER COMPONENT 
-
-/*
-http://localhost:3000/coursedetail/6199709b465c74f3b151d634
-*/ 
-// const PrivateRoute = (route, component) => {
-//   const {isUserSignedIn} = useProvideContext(ProvideContext);
-// }
