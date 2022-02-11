@@ -1,5 +1,4 @@
 import React from "react";
-//import CourseForm from './Courseform';
 import {ProvideContext, useProvideContext} from '../context';
 import {useParams} from "react-router-dom";
 import { usePrivateRoute } from "../usePrivateRoute";

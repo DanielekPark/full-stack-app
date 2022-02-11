@@ -1,17 +1,18 @@
 import React from "react";
 import {ProvideContext, useProvideContext} from '../context';
 import { usePrivateRoute } from "../usePrivateRoute";
+
 import CryptoJS from "crypto-js";
 
 const CreateCourse = () => {
   const {cancelBtn, course, setCourse, userAccount} = useProvideContext(ProvideContext);
-  const {isSignedIn, isUserSignedIn} = usePrivateRoute(); 
+  const {isSignedIn, isUserSignedIn, setIsSignedIn} = usePrivateRoute(); 
   const user = JSON.parse(localStorage.getItem('user')); 
   const key = JSON.parse(localStorage.getItem('key'));
 
   React.useEffect(() => {
     document.title = "Create A Course"; 
-    console.log(user)
+    console.log(isSignedIn)
   }, [])
 
   React.useEffect(() => {
@@ -98,7 +99,7 @@ const CreateCourse = () => {
       </div>
     )     
   }else {
-    return <h1>please sign in</h1>
+    return <h1>Please sign in</h1>
   }
 }
 
