@@ -19,16 +19,16 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Switch>
-        <Route exact path='/'><Courses /></Route>
-        <Route path='/courses/create'><CreateCourse /></Route>
-        <Route path='/courses/:id/update'><UpdateCourse /></Route>
-        <Route path="/courses/:id"><CoursesDetail /></Route>
-        <Route path='/signin'><UserSignIn /></Route> 
-        <Route path='/signup'><UserSignUp /></Route>
-        <Route path='/signout'><UserSignOut /></Route>
-        <Route component={NotFound}></Route>
-      </Switch>
+        <Switch>
+          <Route exact path='/'><Courses /></Route>
+          <Route path='/courses/create'><CreateCourse /></Route>
+          <Route path='/courses/:id/update'><UpdateCourse /></Route>
+          <Route path="/courses/:id"><CoursesDetail /></Route>
+          <Route path='/signin'><UserSignIn /></Route> 
+          <Route path='/signup'><UserSignUp /></Route>
+          <Route path='/signout'><UserSignOut /></Route>
+          <Route component={NotFound}></Route>
+        </Switch>
     </BrowserRouter>  
   );
 }

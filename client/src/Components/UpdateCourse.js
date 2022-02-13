@@ -15,15 +15,20 @@ export const UpdateCourse = () => {
   const handleSubmit = async (event, obj, method) => {    
     event.preventDefault(); 
 
-    const userData = JSON.parse(localStorage.getItem('user'));  
-    const response = await fetch(url, 
-      {
-        method: method,
-        headers: {
-          'Content-Type': 'application/json'},
-        body: JSON.stringify(obj) 
-      }); 
-    const data = await response.json(response); 
+    try {
+      const userData = JSON.parse(localStorage.getItem('user'));  
+      const response = await fetch(url, 
+        {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json'},
+          body: JSON.stringify(obj) 
+        }); 
+      const data = await response.json(response);       
+    }catch(err) {
+      alert('Unable to update try again later')
+    }
+
   }  
 
   React.useEffect(() => {
@@ -48,8 +53,7 @@ export const UpdateCourse = () => {
                   {/* <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={this.state.title} /> */}
                   <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)} value={course.title} />                
                 </div>
-                {/* <p>By {this.state.user}</p> */}
-                <p>By Needs to be edited to include user name</p>
+                {/* <p>By user</p> */}
               </div>
               <div className="course--description">
                 <div>

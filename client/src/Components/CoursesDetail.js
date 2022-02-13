@@ -4,18 +4,36 @@ import {ProvideContext, useProvideContext} from '../context';
 
 export const CoursesDetail = () => {
   const [courseDetail, setCourseDetail] = React.useState([]); 
-  const {fetchData, cancelBtn} = useProvideContext(ProvideContext); 
+  const {cancelBtn} = useProvideContext(ProvideContext); 
   const {id} = useParams(); 
 
   const storeData = () => localStorage.setItem('dataToUpdate', JSON.stringify(courseDetail));
 
-  const deleteCourse = () => fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
+  const deleteCourse = async () => {
+    try {
+      await fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
+    }catch (err){
+      alert('There was a problem with the request please try again later.'); 
+      window.location.href= "/"; 
+    }
+    
+  } 
+
+  const fetchData = async (id) => {
+    const url = `http://localhost:5001/api/courses/${id}`; 
+    try {
+      const response = await fetch(url); 
+      const data =  await response.json();
+      setCourseDetail(data); 
+    }catch (err) {
+      alert('There was a problem retrieving the details'); 
+      window.location.href= "/"; 
+    }
+  } 
 
   React.useEffect(() => {
     document.title = "Course Details"; 
-    fetchData(`courses/${id}`)
-      .then((data) => setCourseDetail(data))
-      .catch((err) => cancelBtn())
+    fetchData(id)
   }, []);
 
   return (

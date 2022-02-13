@@ -46,7 +46,7 @@ const UserSignUp = () => {
             <div><input id="lastName" name="lastName" type="text" placeholder="Last Name" value={newUser.lastName} onChange={(event) => handleChange(event, setNewUser, newUser)}/></div>
             <div><input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" value={newUser.emailAddress} onChange={(event) => handleChange(event, setNewUser, newUser)}/></div>
             <div><input id="password" name="password" type="password" autoComplete="newpassword" placeholder="Min 7 characters" value={newUser.password} onChange={(event) => handleChange(event, setNewUser, newUser)}/></div>
-            <div><input id="confirmPassword" name="confirmPassword" type="password" autoComplete="newpassword" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}/></div>
+            {/* <div><input id="confirmPassword" name="confirmPassword" type="password" autoComplete="newpassword" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}/></div> */}
             <div id="buttonId" className="grid-100 pad-bottom">
               <button className="button" type="submit">Sign Up</button>
               <button className="button button-secondary" onClick={cancelBtn}>Cancel</button>                

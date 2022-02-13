@@ -10,6 +10,7 @@ export const Courses = () => {
     document.title = "Courses"; 
     fetchData('courses')
       .then((data) => setCoursesData(data))
+      .catch((err) => alert('There was a problem please try again later'))
   }, []);
 
   return (
