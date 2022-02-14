@@ -23,7 +23,7 @@ export const CoursesDetail = () => {
     const url = `http://localhost:5001/api/courses/${id}`; 
     try {
       const response = await fetch(url); 
-      const data =  await response.json();
+      const data = await response.json();
       setCourseDetail(data); 
     }catch (err) {
       alert('There was a problem retrieving the details'); 
@@ -54,7 +54,7 @@ export const CoursesDetail = () => {
           <div className="course--header">
             <h4 className="course--label">Course</h4>
             <h3 className="course--title">{courseDetail.title}</h3>
-            <p>By username: {courseDetail.user}</p>
+            <p>By username: {courseDetail._id}</p>
           </div>
           <div className="course--description">
             <h4>Course Detail</h4>

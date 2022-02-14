@@ -55,6 +55,7 @@ router.put('/:id', async (req, res, next) => {
     let course = await Course.findByIdAndUpdate(req.params.id, {
       title: req.body.title,
       description: req.body.description,
+      estimatedTime: req.body.estimatedTime,
       materialsNeeded: req.body.materialsNeeded    
     }, {new: true, runValidators: true}); 
 

@@ -33,6 +33,7 @@ const CreateCourse = () => {
       alert('please provide required information'); 
       return; 
     } 
+
     try {
       // const data = [{email: user.emailAddress}, {key: key.key}]; 
       // const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), key.key).toString();
@@ -64,7 +65,7 @@ const CreateCourse = () => {
                 <div>
                   <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)} />                
                 </div>
-                {/* <p>By {this.state.user}</p> */}
+                {/* <p>By user</p> */}
               </div>
               <div className="course--description">
                 <div>

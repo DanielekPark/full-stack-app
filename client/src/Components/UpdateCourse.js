@@ -11,9 +11,9 @@ export const UpdateCourse = () => {
   const {isSignedIn, isUserSignedIn} = usePrivateRoute(); 
   const courseToUpdate = JSON.parse(localStorage.getItem('dataToUpdate')); 
 
-  const url = `http://localhost:5001/api/courses/${id}`; 
   const handleSubmit = async (event, obj, method) => {    
     event.preventDefault(); 
+    const url = `http://localhost:5001/api/courses/${id}`; 
 
     try {
       const userData = JSON.parse(localStorage.getItem('user'));  
@@ -24,16 +24,16 @@ export const UpdateCourse = () => {
             'Content-Type': 'application/json'},
           body: JSON.stringify(obj) 
         }); 
-      const data = await response.json(response);       
+      await response.json();
+      await cancelBtn(); 
     }catch(err) {
-      alert('Unable to update try again later')
+      alert('There was a problem, please provide details or try again later.'); 
     }
-
   }  
 
   React.useEffect(() => {
     document.title = "Update A Course"; 
-    setCourse(courseToUpdate)
+    setCourse(courseToUpdate);
   }, []); 
 
   React.useEffect(() => {
@@ -51,7 +51,7 @@ export const UpdateCourse = () => {
                 <h4 className="course--label">Course</h4>
                 <div>
                   {/* <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={this.state.title} /> */}
-                  <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)} value={course.title} />                
+                  <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={(event) => handleChange(event, setCourse, course)} defaultValue={courseToUpdate.title} />                
                 </div>
                 {/* <p>By user</p> */}
               </div>
@@ -69,7 +69,7 @@ export const UpdateCourse = () => {
                     <h4>Estimated Time</h4>
                     <div>
                       {/* <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={this.state.estimatedTime} /> */}
-                      <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange={(event) => handleChange(event, setCourse, course)} value={course.estimatedTime} />                    
+                      <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange={(event) => handleChange(event, setCourse, course)} defaultValue={course.estimatedTime} />                    
                     </div>
                   </li>
                   <li className="course--stats--list--item">
@@ -85,7 +85,7 @@ export const UpdateCourse = () => {
             <div className="grid-100 pad-bottom">
               {/* <button className="button" type="submit" onClick={this.updateOrCreateCourse}>{this.getAction(true)} Course</button>
               <button className="button button-secondary" onClick={this.goToCourse}>Cancel</button> */}
-              <button className="button" type="submit" onClick={cancelBtn}>Update</button>
+              <button className="button" type="submit" onSubmit={(event) => handleSubmit(event, course, 'PUT')}>Update</button>
               <button className="button button-secondary" onClick={cancelBtn}>Cancel</button>            
             </div>
           </form>
