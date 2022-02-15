@@ -6,16 +6,23 @@ export const CoursesDetail = () => {
   const [courseDetail, setCourseDetail] = React.useState([]); 
   const {cancelBtn} = useProvideContext(ProvideContext); 
   const {id} = useParams(); 
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const storeData = () => localStorage.setItem('dataToUpdate', JSON.stringify(courseDetail));
 
   const deleteCourse = async () => {
+    if(!user) {
+      alert('Please sign in.');
+      return; 
+    }
+    
     try {
       await fetch(`http://localhost:5001/api/courses/${id}`, {method: 'DELETE'});
     }catch (err){
       alert('There was a problem with the request please try again later.'); 
       window.location.href= "/"; 
-    }
+    }      
+
     
   } 
 
