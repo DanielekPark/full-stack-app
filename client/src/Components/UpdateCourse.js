@@ -34,6 +34,7 @@ export const UpdateCourse = () => {
   React.useEffect(() => {
     document.title = "Update A Course"; 
     setCourse(courseToUpdate);
+    // eslint-disable-next-line
   }, []); 
 
   React.useEffect(() => {

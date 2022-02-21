@@ -21,7 +21,8 @@ export const usePrivateRoute = () => {
   }  
 
   React.useEffect(() => {
-    isUserSignedIn()
+    isUserSignedIn(); 
+    // eslint-disable-next-line
   }, [isSignedIn]);
 
   return {isSignedIn, setIsSignedIn, isUserSignedIn}; 

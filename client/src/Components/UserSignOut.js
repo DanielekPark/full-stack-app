@@ -10,6 +10,7 @@ const UserSignOut = () => {
     localStorage.removeItem('user'); 
     localStorage.removeItem('key');
     localStorage.removeItem('dataToUpdate'); 
+    // eslint-disable-next-line
   }, []); 
 
   return <Redirect to="/" />

@@ -23,7 +23,6 @@ export const CoursesDetail = () => {
       window.location.href= "/"; 
     }      
 
-    
   } 
 
   const fetchData = async (id) => {
@@ -41,6 +40,7 @@ export const CoursesDetail = () => {
   React.useEffect(() => {
     document.title = "Course Details"; 
     fetchData(id)
+    // eslint-disable-next-line
   }, []);
 
   return (

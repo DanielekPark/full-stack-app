@@ -30,6 +30,7 @@ const UserSignUp = () => {
     document.title = "Sign Up"; 
     const user = JSON.parse(localStorage.getItem('user')); 
     if(user) setIsSignedIn(true); 
+    // eslint-disable-next-line
   }, [])
 
   React.useEffect(() => {

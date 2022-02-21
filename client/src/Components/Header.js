@@ -8,7 +8,8 @@ const Header = () => {
   const {isSignedIn, setIsSignedIn, isUserSignedIn, signOut} = useProvideContext(ProvideContext);
 
   React.useEffect(() => {
-    isUserSignedIn();    
+    isUserSignedIn(); 
+    // eslint-disable-next-line  
   }, []);
 
   React.useEffect(() => {

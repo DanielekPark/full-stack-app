@@ -12,7 +12,7 @@ const CreateCourse = () => {
 
   React.useEffect(() => {
     document.title = "Create A Course"; 
-    console.log(isSignedIn)
+    // eslint-disable-next-line
   }, [])
 
   React.useEffect(() => {

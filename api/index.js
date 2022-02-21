@@ -2,7 +2,6 @@ const cors = require("cors");
 const config = require("config");
 const mongoose = require("mongoose");
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const app = express();
 const users = require("./routes/userRoute");
 const courses = require("./routes/courseRoute");
